@@ -1,4 +1,6 @@
 import { useState } from "react";
+import PlantFilter from "../components/PlantFilter";
+
 import PlantCard from "../components/PlantCard";
 
 function PlantPage() {
@@ -37,7 +39,7 @@ function PlantPage() {
                 )}
 
                 <section className="hidden  md:block w-1/4 h-fit ">
-                    {/* filtry */}
+                    <PlantFilter />
                 </section>
                 
                 <section className="w-full ">
