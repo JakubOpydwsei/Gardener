@@ -1,6 +1,8 @@
 import { useState } from "react";
 import PlantFilter from "../components/PlantFilter";
 
+import PlantCard from "../components/PlantCard";
+
 function PlantPage() {
     const [showToast, setShowToast] = useState(false);
 
@@ -11,6 +13,18 @@ function PlantPage() {
         }, 2000);
     };
     const menuHandler = searchHandler
+
+    const plants = [];
+
+    for (let i = 1; i <= 12; i++) {
+        plants.push({
+            id: i,
+            name: 'mlecz numer:' + i,
+            img: 'https://picsum.photos/200',
+            imgDesc: 'description for image',
+            desc: 'jest to krótki opis kwaitka, coś ciekawego o nim? taki żółty rosnący na betonie'
+        })
+    }
 
     return (
         <>
@@ -57,7 +71,9 @@ function PlantPage() {
 
                     <div className="grid  mx-4 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
 
-                        {/* miejsce na komponent */}
+                    {plants.map((plant) =>
+                            <PlantCard key={plant.id} plant={plant} />
+                        )}
 
                     </div>
 
