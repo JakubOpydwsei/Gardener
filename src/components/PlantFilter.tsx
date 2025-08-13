@@ -1,4 +1,4 @@
-function Filter() {
+function PlantFilter() {
     return (
         <div>
             <strong>Filtry</strong>
@@ -98,4 +98,4 @@ function Filter() {
     );
 }
 
-export default Filter;
+export default PlantFilter;

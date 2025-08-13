@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Filter from "../components/Filter";
+import PlantFilter from "../components/PlantFilter";
 
 function PlantPage() {
     const [showToast, setShowToast] = useState(false);
@@ -25,7 +25,7 @@ function PlantPage() {
                 )}
 
                 <section className="hidden  md:block w-1/4 h-fit ">
-                    <Filter />
+                    <PlantFilter />
                 </section>
                 
                 <section className="w-full ">
