@@ -3,8 +3,15 @@ import './App.css'
 import Layout from './components/Layout'
 import PlantPage from './pages/PlantPage'
 import PlantInfoPage from './pages/PlantInfoPage'
+import AOS from 'aos'
+import "aos/dist/aos.css";
+import { useEffect } from 'react'
 
 function App() {
+
+  useEffect(() => {
+    AOS.init({ duration: 800, once: true }); // duration = czas animacji
+  }, []);
 
   return (
     <>
