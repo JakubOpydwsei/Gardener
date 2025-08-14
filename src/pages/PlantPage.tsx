@@ -1,10 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PlantFilter from "../components/PlantFilter";
 
 import PlantCard from "../components/PlantCard";
 
+type PlantType = {
+    id: number,
+    name: string,
+    desc: string,
+    img: string,
+    imgDesc: string
+}
+
 function PlantPage() {
     const [showToast, setShowToast] = useState(false);
+    const [plants, setPlants] = useState([]) as any[];
 
     const searchHandler = () => {
         setShowToast(true);
@@ -14,17 +23,29 @@ function PlantPage() {
     };
     const menuHandler = searchHandler
 
-    const plants = [];
+    useEffect(() => {
 
-    for (let i = 1; i <= 12; i++) {
-        plants.push({
-            id: i,
-            name: 'mlecz numer:' + i,
-            img: 'https://picsum.photos/200',
-            imgDesc: 'description for image',
-            desc: 'jest to krótki opis kwaitka, coś ciekawego o nim? taki żółty rosnący na betonie'
-        })
-    }
+        const timer = setTimeout(() => {
+            let newPlants = []
+            for (let i = 1; i <= 12; i++) {
+                newPlants.push({
+                    id: i,
+                    name: 'mlecz numer:' + i,
+                    img: 'https://kot-w-butach.pl/wp-content/uploads/2024/10/kot-rasy-maine-coon.png',
+                    imgDesc: 'description for image',
+                    desc: 'jest to krótki opis kwaitka, coś ciekawego o nim? taki żółty rosnący na betonie'
+                })
+            }
+            if (newPlants != undefined) {
+                setPlants(newPlants);
+            }
+        }, 2000);
+
+        return () => clearTimeout(timer);
+
+    }, [])
+
+
 
     return (
         <>
@@ -41,7 +62,7 @@ function PlantPage() {
                 <section className="hidden  md:block w-1/4 h-fit ">
                     <PlantFilter />
                 </section>
-                
+
                 <section className="w-full ">
                     <div className="flex justify-between mb-8">
 
@@ -69,11 +90,25 @@ function PlantPage() {
                         </div>
                     </div>
 
-                    <div className="grid  mx-4 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+                    <div className="grid mx-4 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
 
-                    {plants.map((plant) =>
+                        {plants.map((plant: PlantType) =>
                             <PlantCard key={plant.id} plant={plant} />
                         )}
+
+                        {plants.length === 0 &&
+                            [...Array(12)].map((_, i) => (
+                                <div key={i} className="flex flex-col gap-4 bg-base-200 shadow-sm p-4 rounded-xl">
+                                    <div className="skeleton h-46 w-full"></div>
+                                    <div className="skeleton h-6 w-full"></div>
+                                    <div className="skeleton h-12 w-full"></div>
+                                    <div className="skeleton h-6 w-full"></div>
+                                    <div className="skeleton h-7 w-full"></div>
+                                    <div className="skeleton h-9 w-full"></div>
+                                </div>
+                            ))
+                        }
+
 
                     </div>
 
