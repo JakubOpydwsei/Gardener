@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PlantFilter from "../components/PlantFilter";
 
 import PlantCard from "../components/PlantCard";
 
+import { plantService } from "../services/plantService";
+import { data } from "react-router-dom";
+import { Plant } from "../Types/plant";
+
 function PlantPage() {
     const [showToast, setShowToast] = useState(false);
+    const [plants, setPlants] = useState<Plant[]>([])
 
     const searchHandler = () => {
         setShowToast(true);
@@ -14,17 +19,14 @@ function PlantPage() {
     };
     const menuHandler = searchHandler
 
-    const plants = [];
-
-    for (let i = 1; i <= 12; i++) {
-        plants.push({
-            id: i,
-            name: 'mlecz numer:' + i,
-            img: 'https://picsum.photos/200',
-            imgDesc: 'description for image',
-            desc: 'jest to krótki opis kwaitka, coś ciekawego o nim? taki żółty rosnący na betonie'
+    useEffect(() => {
+        plantService.getAllPlants().then((data)=>{
+            setPlants(data)
         })
-    }
+        .catch((error) => {
+            console.log(error)
+        })
+    },[])
 
     return (
         <>
