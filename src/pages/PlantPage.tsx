@@ -3,6 +3,15 @@ import PlantFilter from "../components/PlantFilter";
 
 import PlantCard from "../components/PlantCard";
 
+
+import { plantService } from "../services/plantService";
+import { data } from "react-router-dom";
+import { Plant } from "../Types/plant";
+
+function PlantPage() {
+    const [showToast, setShowToast] = useState(false);
+    const [plants, setPlants] = useState<Plant[]>([])
+
 type PlantType = {
     id: number,
     name: string,
@@ -15,6 +24,7 @@ function PlantPage() {
     const [showToast, setShowToast] = useState(false);
     const [plants, setPlants] = useState([]) as any[];
 
+
     const searchHandler = () => {
         setShowToast(true);
         setTimeout(() => {
@@ -24,6 +34,14 @@ function PlantPage() {
     const menuHandler = searchHandler
 
     useEffect(() => {
+        plantService.getAllPlants().then((data)=>{
+            setPlants(data)
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    },[])
+
 
         const timer = setTimeout(() => {
             let newPlants = []
@@ -44,8 +62,6 @@ function PlantPage() {
         return () => clearTimeout(timer);
 
     }, [])
-
-
 
     return (
         <>
