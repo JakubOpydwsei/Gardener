@@ -79,7 +79,7 @@ function PlantInfoPage() {
             <hr />
 
             {/* Statsy wariant 2 */}
-            <div className="grid grid-cols-2 my-40">
+            <div className="grid grid-cols-2 overflow-hidden my-40">
                 <div className="stats-vertical shadow overflow-hidden">
 
                     <div data-aos="fade-right" className="stat place-items-center">
@@ -128,7 +128,7 @@ function PlantInfoPage() {
             <hr />
 
             {/* Timeline wariant 1 */}
-            <ul className="timeline timeline-snap-icon max-md:timeline-compact timeline-vertical">
+            <ul className="timeline timeline-snap-icon max-md:timeline-compact timeline-vertical overflow-hidden">
 
                 <li data-aos="fade-right">
                     <div className="timeline-middle">

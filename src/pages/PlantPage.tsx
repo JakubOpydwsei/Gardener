@@ -1,19 +1,12 @@
 import { useEffect, useState } from "react";
 import PlantFilter from "../components/PlantFilter";
-
 import PlantCard from "../components/PlantCard";
-
-type PlantType = {
-    id: number,
-    name: string,
-    desc: string,
-    img: string,
-    imgDesc: string
-}
+import { plantService } from "../services/plantService";
+import { Plant } from "../Types/plant";
 
 function PlantPage() {
     const [showToast, setShowToast] = useState(false);
-    const [plants, setPlants] = useState([]) as any[];
+    const [plants, setPlants] = useState<Plant[]>([])
 
     const searchHandler = () => {
         setShowToast(true);
@@ -24,28 +17,13 @@ function PlantPage() {
     const menuHandler = searchHandler
 
     useEffect(() => {
-
-        const timer = setTimeout(() => {
-            let newPlants = []
-            for (let i = 1; i <= 12; i++) {
-                newPlants.push({
-                    id: i,
-                    name: 'mlecz numer:' + i,
-                    img: 'https://kot-w-butach.pl/wp-content/uploads/2024/10/kot-rasy-maine-coon.png',
-                    imgDesc: 'description for image',
-                    desc: 'jest to krótki opis kwaitka, coś ciekawego o nim? taki żółty rosnący na betonie'
-                })
-            }
-            if (newPlants != undefined) {
-                setPlants(newPlants);
-            }
-        }, 2000);
-
-        return () => clearTimeout(timer);
-
+        plantService.getAllPlants().then((data) => {
+            setPlants(data)
+        })
+            .catch((error) => {
+                console.log(error)
+            })
     }, [])
-
-
 
     return (
         <>
@@ -92,7 +70,7 @@ function PlantPage() {
 
                     <div className="grid mx-4 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
 
-                        {plants.map((plant: PlantType) =>
+                        {plants.map((plant: Plant) =>
                             <PlantCard key={plant.id} plant={plant} />
                         )}
 
