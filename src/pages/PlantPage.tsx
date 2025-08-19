@@ -25,7 +25,6 @@ function PlantPage() {
             })
     }, [])
 
-
     return (
         <>
             <div className=" flex">
