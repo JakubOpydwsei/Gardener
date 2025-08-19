@@ -8,8 +8,7 @@ function PlantCard({ plant }: { plant: Plant }) {
 
     const moreHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation();
-        alert("Strona w trakcie pracy");
-        navigate("/");
+        navigate("/plant/" + plant.id);
     };
 
     return (
