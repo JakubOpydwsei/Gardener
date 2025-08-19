@@ -1,14 +1,7 @@
 import { useNavigate } from "react-router-dom";
+import { Plant } from "../Types/plant";
 
-type PlantType = {
-    id: number,
-    name: string,
-    desc: string,
-    img: string,
-    imgDesc: string
-}
-
-function PlantCard({ plant }: { plant: PlantType }) {
+function PlantCard({ plant }: { plant: Plant }) {
 
     const navigate = useNavigate();
 
@@ -23,13 +16,13 @@ function PlantCard({ plant }: { plant: PlantType }) {
                 <div className="collapse-title font-semibold p-0">
                     <figure className="p-3 rounded-xl">
                         <img
-                            src={plant.img}
-                            alt={plant.imgDesc}
-                            className="rounded-xl w-full" />
+                            src={plant.imageUrl}
+                            // alt={plant.imgDesc}
+                            className="rounded-xl w-full h-48 object-cover" />
                     </figure>
                     <div className="card-body items-center text-center">
                         <h2 className="card-title">{plant.name}</h2>
-                        <h3>{plant.desc}</h3>
+                        <h3>{plant.soil}</h3>
                         <h3>jakieś kolejne info</h3>
                         <p>
                             Lorem ipsum dolor sit amet consectetur
