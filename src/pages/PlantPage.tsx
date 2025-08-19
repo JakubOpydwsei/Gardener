@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import PlantFilter from "../components/PlantFilter";
 import PlantCard from "../components/PlantCard";
-import { plantService } from "../services/plantService";
-import { Plant } from "../Types/plant";
+import { plantService } from "../services/plantService.ts";
+import { Plant } from "../Types/plant.ts";
 
 function PlantPage() {
     const [showToast, setShowToast] = useState(false);
