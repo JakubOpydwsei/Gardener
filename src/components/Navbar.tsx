@@ -6,12 +6,14 @@ function Navbar() {
 
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
     `px-3 py-2 rounded-md transition-colors duration-200 whitespace-nowrap ${
-      isActive ? "bg-green-400 text-white" : "text-gray-700 hover:bg-green-100"
+      isActive
+        ? "bg-green-400 text-white"
+        : "text-gray-700 hover:bg-green-200 hover:shadow-sm"
     }`;
 
   return (
     <nav className="bg-emerald-50 shadow-md w-full sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-2 sm:px-4 md:px-6 lg:px-12 flex justify-between items-center h-16">
+      <div className="max-w-full mx-auto px-2 sm:px-4 md:px-6 lg:px-12 flex items-center h-16">
         <div className="flex items-center space-x-2 sm:space-x-3">
           <img src="" alt="logo" className="h-6 w-6 sm:h-8 sm:w-8" />
           <Link
@@ -23,7 +25,7 @@ function Navbar() {
         </div>
 
         <button
-          className="lg:hidden p-2 rounded-md text-gray-700 hover:bg-green-100"
+          className="lg:hidden p-2 rounded-md text-gray-700 hover:bg-green-100 ml-auto"
           onClick={() => setOpen(!open)}
         >
           {open ? (
@@ -59,7 +61,7 @@ function Navbar() {
           )}
         </button>
 
-        <div className="hidden lg:flex flex-wrap gap-2 lg:gap-4 overflow-x-auto">
+        <div className="hidden lg:flex lg:w-full lg:justify-between lg:mx-4 xl:justify-start xl:gap-6 xl:ml-6 flex-wrap overflow-x-auto">
           <NavLink
             to="/"
             end
@@ -102,6 +104,9 @@ function Navbar() {
           >
             O projekcie
           </NavLink>
+        </div>
+
+        <div className="hidden lg:flex flex-wrap gap-2 lg:gap-4">
           <NavLink
             to="/profil"
             className={({ isActive }) =>
