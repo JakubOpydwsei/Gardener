@@ -23,7 +23,7 @@ function Navbar() {
         </div>
 
         <button
-          className="md:hidden p-2 rounded-md text-gray-700 hover:bg-green-100"
+          className="lg:hidden p-2 rounded-md text-gray-700 hover:bg-green-100"
           onClick={() => setOpen(!open)}
         >
           {open ? (
@@ -59,7 +59,7 @@ function Navbar() {
           )}
         </button>
 
-        <div className="hidden md:flex flex-wrap gap-2 lg:gap-4 overflow-x-auto">
+        <div className="hidden lg:flex flex-wrap gap-2 lg:gap-4 overflow-x-auto">
           <NavLink
             to="/"
             end
@@ -114,7 +114,7 @@ function Navbar() {
       </div>
 
       {open && (
-        <div className="md:hidden flex flex-col space-y-2 px-4 pb-4">
+        <div className="lg:hidden flex flex-col space-y-2 px-4 pb-4">
           <NavLink
             to="/"
             end
