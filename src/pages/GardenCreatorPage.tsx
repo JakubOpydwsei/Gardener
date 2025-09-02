@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { UploadPanel } from "../components/UploadPanel";
 
-export function GardenCreator() {
+export function GardenCreatorPage() {
   const [bg, setBeg] = useState<string | null>(null);
 
   return (
@@ -14,4 +14,4 @@ export function GardenCreator() {
   );
 }
 
-export default GardenCreator;
+export default GardenCreatorPage;

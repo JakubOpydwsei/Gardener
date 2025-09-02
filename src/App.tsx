@@ -6,7 +6,7 @@ import PlantInfoPage from "./pages/PlantInfoPage";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
-import GardenCreator from "./pages/GardenCreator";
+import { GardenCreatorPage } from "./pages/GardenCreatorPage";
 
 function App() {
   useEffect(() => {
@@ -21,7 +21,7 @@ function App() {
             <Route index element={<h1>Home page</h1>} />
             <Route path="/encyklopedia" element={<PlantPage />} />
             <Route path="/plant/:id" element={<PlantInfoPage />} />
-            <Route path="/garden-creator" element={<GardenCreator />} />
+            <Route path="/garden-creator" element={<GardenCreatorPage />} />
             <Route path="*" element={<h1>404 - Nie znaleziono strony</h1>} />
           </Route>
         </Routes>
