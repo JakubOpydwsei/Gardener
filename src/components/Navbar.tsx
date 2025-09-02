@@ -72,7 +72,7 @@ function Navbar() {
             Strona główna
           </NavLink>
           <NavLink
-            to="/kreator-ogrodu"
+            to="/garden-creator"
             end
             className={({ isActive }) =>
               `text-sm sm:text-base ${navLinkClass({ isActive })}`
