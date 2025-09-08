@@ -19,7 +19,7 @@ export function UploadPanel({
     <div>
       <h2 className="font-semibold mb-2">1) Wgraj obraz działki</h2>
       <p className="text-sm text-slate-600 mb-3">Obsługiwanie: JPG/PNG</p>
-      <div className="flex items-center gap-2">
+      <div>
         <input
           ref={fileRef}
           type="file"
@@ -28,7 +28,7 @@ export function UploadPanel({
             const f = e.target.files?.[0];
             if (f) handleFile(f);
           }}
-          className="block w-full text-sm file:mr-4 file:btn file:btn-primary file:cursor-pointer"
+          className="text-sm input w-fit py-2 m-auto mb-4"
         />
       </div>
     </div>
