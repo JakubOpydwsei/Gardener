@@ -8,6 +8,7 @@ import "aos/dist/aos.css";
 import { useEffect } from "react";
 import { GardenCreatorPage } from "./pages/GardenCreatorPage";
 import AboutProjectPage from "./pages/AboutProjectPage";
+import HomePage from "./pages/HomePage";
 
 function App() {
   useEffect(() => {
@@ -19,7 +20,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<h1>Home page</h1>} />
+            <Route index element={<HomePage />} />
             <Route path="/garden-creator" element={<GardenCreatorPage />} />
             <Route path="/encyklopedia" element={<PlantPage />} />
             <Route path="/plant/:id" element={<PlantInfoPage />} />
