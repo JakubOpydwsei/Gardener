@@ -97,7 +97,7 @@ function Navbar() {
             Moje rośliny
           </NavLink>
           <NavLink
-            to="/o-projekcie"
+            to="/about-project"
             className={({ isActive }) =>
               `text-sm sm:text-base ${navLinkClass({ isActive })}`
             }
