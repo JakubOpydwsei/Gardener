@@ -268,10 +268,25 @@ export default function CanvasStage({
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="flex gap-2">
-        <button onClick={handleRemoveBackground}>Wyczyść</button>
-        <button onClick={handleSaveState}>Zapisz</button>
-        <button onClick={handleLoadState}>Wczytaj</button>
+      <div className="flex gap-2 justify-center mt-2">
+        <button
+          onClick={handleRemoveBackground}
+          className="px-4 py-2 bg-red-500 text-white rounded w-max"
+        >
+          Wyczyść
+        </button>
+        <button
+          onClick={handleSaveState}
+          className="px-4 py-2 bg-blue-500 text-white rounded w-max"
+        >
+          Zapisz
+        </button>
+        <button
+          onClick={handleLoadState}
+          className="px-4 py-2 bg-green-500 text-white rounded w-max"
+        >
+          Wczytaj
+        </button>
       </div>
 
       <div
