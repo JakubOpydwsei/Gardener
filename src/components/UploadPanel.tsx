@@ -1,18 +1,25 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
-export function UploadPanel({
-  onImage,
-}: {
-  onImage: (dataUrl: string) => void;
-}) {
-  const fileRef = useRef<HTMLInputElement | null>(null);
+interface UploadPanelProps {
+  setBg: (url: string | undefined) => void;
+  clearSignal?: boolean;
+}
 
-  const handleFile = (file: File) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      onImage(reader.result as string);
-    };
-    reader.readAsDataURL(file);
+export default function UploadPanel({ setBg, clearSignal }: UploadPanelProps) {
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    if (clearSignal && inputRef.current) {
+      inputRef.current.value = "";
+    }
+  }, [clearSignal]);
+
+  const handleUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files?.[0]) {
+      const file = e.target.files[0];
+      const url = URL.createObjectURL(file);
+      setBg(url);
+    }
   };
 
   return (
@@ -21,13 +28,10 @@ export function UploadPanel({
       <p className="text-sm text-slate-600 mb-3">Obsługiwanie: JPG/PNG</p>
       <div>
         <input
-          ref={fileRef}
+          ref={inputRef}
           type="file"
           accept="image/*"
-          onChange={(e) => {
-            const f = e.target.files?.[0];
-            if (f) handleFile(f);
-          }}
+          onChange={handleUpload}
           className="text-sm input w-fit py-2 m-auto mb-4"
         />
       </div>
