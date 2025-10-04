@@ -32,7 +32,7 @@ export default function UploadPanel({ setBg, clearSignal }: UploadPanelProps) {
           type="file"
           accept="image/*"
           onChange={handleUpload}
-          className="text-sm input w-fit py-2 m-auto mb-4"
+          className="text-sm py-2 m-auto mb-4 file:bg-blue-500 file:text-white file:py-2 file:px-4 file:rounded file:shadow file:hover:bg-blue-600 file:cursor-pointer"
         />
       </div>
     </div>
