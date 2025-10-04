@@ -1,33 +1,39 @@
 import { Plant } from "../Types/plant"
-import { plants } from "../mocks/plantMock.ts"
+
+const BASE_URL = "http://localhost:3001/plants";
 
 export const plantService = {
-    async getAllPlants(): Promise<Plant[]>{
-        
-        // fetch z backendu
-        
-        return await new Promise<Plant[]> ((resolve, reject)=>{
-            setTimeout(() => {
-                // fail
-                // reject(new Error("Nie udało się pobrać listy roślin"));
+    async getAllPlants(): Promise<Plant[]> {
+        try {
+            const response = await fetch(BASE_URL);
 
-                // sucess
-                resolve(plants);
-            }, 3000);
-        });
+            if (!response.ok) {
+                console.log("Error status: " + response.status);
+            }
 
+            return await response.json();
+        } catch (error) {
+            console.error("Nie udało się pobrać listy roślin:", error);
+            throw error;
+        }
     },
 
-    async getPlantById(id: number): Promise<Plant | undefined>{
-        return await new Promise<Plant | undefined> ((resolve,reject)=>{
-            setTimeout(() => {
-                // fail
-                // reject(new Error("Nie udało się pobrać rośliny"));
+    async getPlantById(id: number): Promise<Plant | undefined> {
+        try {
+            const response = await fetch(`${BASE_URL}/id/${id}`);
 
-                // sucess
-                resolve(plants[id])
-            }, 3000);
-        })
+            if (!response.ok) {
+                if (response.status === 404) {
+                    return undefined;
+                }
+                console.log("Error status: " + response.status);
+            }
+
+            return await response.json();
+        } catch (error) {
+            console.error(`Nie udało się pobrać rośliny o id=${id}:`, error);
+            throw error;
+        }
     }
-    
+
 }
