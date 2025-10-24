@@ -1,20 +1,20 @@
 export interface Plant {
   id: string;
-  name: string; 
-  latinName?: string; 
+  name: string;
+  latinName?: string;
   imageUrl?: string;
-  species: string; 
-  soil: string; 
+  species: string;
+  soil: string;
   waterRequirement: 'low' | 'medium' | 'high';
   sunlight: 'full sun' | 'partial shade' | 'shade';
   floweringPeriod: {
-    start: number; 
+    start: number;
     end: number;
   };
   heightCm?: number;
-  color?: string[]; 
+  color?: string[];
   compatibleWith?: string[];
-  soilPh?: number; 
+  soilPh?: number;
 }
 export const plants: Plant[] = [
   {
