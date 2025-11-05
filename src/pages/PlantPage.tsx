@@ -9,12 +9,12 @@ function PlantPage() {
   const [showToast, setShowToast] = useState(false);
   const [plants, setPlants] = useState<Plant[]>([]);
   const [filters, setFilters] = useState<Filters>({
-    floweringSeasons: [], // done both
-    lifeLength: 0, // done both
-    plantingSeasons: [], // done both
-    soil: [], // done both
-    toxiticy: [], // done both
-    species: [], // done both
+    floweringSeasons: [],
+    lifeLength: 0,
+    plantingSeasons: [],
+    soil: [],
+    toxiticy: [],
+    species: [],
   });
 
   const handleFilterChange = (newFilters: typeof filters) => {
@@ -37,13 +37,11 @@ function PlantPage() {
             const { start, end } = seasons[season];
             const { start: plantStart, end: plantEnd } = plant.floweringPeriod;
 
-            // obsługa zakresu przechodzącego przez koniec roku
             if (start > end) {
               return plantStart >= start || plantEnd <= end;
             }
             return plantStart <= end && plantEnd >= start;
           });
-    // console.log(filteredFloweringSeasons);
 
     const lengthMap = {
       1: "annual",
@@ -63,7 +61,6 @@ function PlantPage() {
             const { start, end } = seasons[season];
             const { start: plantStart, end: plantEnd } = plant.plantingPeriod;
 
-            // obsługa zakresu przechodzącego przez koniec roku
             if (start > end) {
               return plantStart >= start || plantEnd <= end;
             }
@@ -89,14 +86,7 @@ function PlantPage() {
         filteredToxiticy = plant.toxicity === true;
       }
     }
-    // dodać obsługę gdy zaznaczamy wiele sezonów a nie jeden, oraz wiele gleb
-    // console.log(plant.name);
-    // console.log(plant.toxicity);
-    // console.log(filteredFloweringSeasons);
-    // console.log(filteredLifeLength);
-    // console.log(filteredPlantingSeasons);
-    // console.log(filteredSoil);
-    // console.log(filteredSpecies);
+
     return (
       filteredFloweringSeasons &&
       filteredLifeLength &&
@@ -106,9 +96,6 @@ function PlantPage() {
       filteredToxiticy
     );
   });
-
-  // console.log({ plants });
-  console.log(filteredPlants.length);
 
   const searchHandler = () => {
     setShowToast(true);

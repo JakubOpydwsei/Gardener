@@ -6,7 +6,6 @@ type Props = {
 
 function PlantFilter({ filters, onFilterChange }: Props) {
   function handleFloweringChange(season: string): void {
-    console.log({ season });
     const updatedFlowering = filters.floweringSeasons.includes(season)
       ? filters.floweringSeasons.filter((s) => s !== season)
       : [...filters.floweringSeasons, season];
@@ -14,7 +13,6 @@ function PlantFilter({ filters, onFilterChange }: Props) {
   }
 
   function handlePlantingChange(season: string): void {
-    console.log({ season });
     const updatedPlanting = filters.plantingSeasons.includes(season)
       ? filters.plantingSeasons.filter((s) => s !== season)
       : [...filters.plantingSeasons, season];
@@ -25,12 +23,10 @@ function PlantFilter({ filters, onFilterChange }: Props) {
     e: React.ChangeEvent<HTMLInputElement>
   ): void {
     const lifeLength = Number(e.target.value);
-    console.log({ lifeLength });
     onFilterChange({ ...filters, lifeLength: lifeLength });
   }
 
   function handleSoilChange(soil: string): void {
-    console.log({ soil });
     const updatedType = filters.soil.includes(soil)
       ? filters.soil.filter((v) => v !== soil)
       : [...filters.soil, soil];
@@ -38,7 +34,6 @@ function PlantFilter({ filters, onFilterChange }: Props) {
   }
 
   function handleToxiticyChange(toxiticy: string): void {
-    console.log({ toxiticy });
     const updatedToxiticy = filters.toxiticy?.includes(toxiticy)
       ? filters.toxiticy.filter((t) => t !== toxiticy)
       : [...filters.toxiticy, toxiticy];
@@ -46,7 +41,6 @@ function PlantFilter({ filters, onFilterChange }: Props) {
   }
 
   function handleSpeciesChange(species: string): void {
-    console.log({ species });
     const updatedSpecies = filters.species.includes(species)
       ? filters.species.filter((s) => s !== species)
       : [...filters.species, species];
