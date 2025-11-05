@@ -19,7 +19,6 @@ function PlantPage() {
 
   const handleFilterChange = (newFilters: typeof filters) => {
     setFilters(newFilters);
-    console.log(newFilters);
   };
 
   const filteredPlants = plants.filter((plant) => {
@@ -28,13 +27,13 @@ function PlantPage() {
       spring: { start: 3, end: 5 },
       summer: { start: 6, end: 8 },
       autumn: { start: 9, end: 11 },
-    };
+    } as const;
 
     const filteredFloweringSeasons =
       filters.floweringSeasons.length === 0
         ? true
         : filters.floweringSeasons.some((season) => {
-            const { start, end } = seasons[season];
+            const { start, end } = seasons[season as keyof typeof seasons];
             const { start: plantStart, end: plantEnd } = plant.floweringPeriod;
 
             if (start > end) {
@@ -43,7 +42,7 @@ function PlantPage() {
             return plantStart <= end && plantEnd >= start;
           });
 
-    const lengthMap = {
+    const lengthMap: Record<number, string> = {
       1: "annual",
       2: "biennial",
       3: "perennial",
@@ -58,7 +57,7 @@ function PlantPage() {
       filters.plantingSeasons.length === 0
         ? true
         : filters.plantingSeasons.some((season) => {
-            const { start, end } = seasons[season];
+            const { start, end } = seasons[season as keyof typeof seasons];
             const { start: plantStart, end: plantEnd } = plant.plantingPeriod;
 
             if (start > end) {
@@ -66,7 +65,6 @@ function PlantPage() {
             }
             return plantStart <= end && plantEnd >= start;
           });
-    console.log(filteredPlantingSeasons);
 
     const filteredSpecies =
       filters.species.length === 0 ||

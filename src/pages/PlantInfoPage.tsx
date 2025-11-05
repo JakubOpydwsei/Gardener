@@ -24,7 +24,6 @@ function PlantInfoPage() {
 
     fetchPlant();
   }, [id]);
-  console.log(plant);
 
   if (!plant) {
     return <h1 className="text-6xl">Pobieranie danych rośliny</h1>;

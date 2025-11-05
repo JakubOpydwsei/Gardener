@@ -1,4 +1,5 @@
 import { Filters } from "../Types/filters";
+import { SoilType } from "../Types/plant";
 type Props = {
   filters: Filters;
   onFilterChange: (filters: Filters) => void;
@@ -26,7 +27,7 @@ function PlantFilter({ filters, onFilterChange }: Props) {
     onFilterChange({ ...filters, lifeLength: lifeLength });
   }
 
-  function handleSoilChange(soil: string): void {
+  function handleSoilChange(soil: SoilType): void {
     const updatedType = filters.soil.includes(soil)
       ? filters.soil.filter((v) => v !== soil)
       : [...filters.soil, soil];
@@ -100,27 +101,27 @@ function PlantFilter({ filters, onFilterChange }: Props) {
 
       <fieldset className="fieldset border pl-6 p-4 grid grid-cols-2">
         <legend className="fieldset-legend">Typ gleby</legend>
-        {["sandy", "clay", "loamy", "peaty", "chalky", "silty"].map(
-          (soil, i) => (
-            <label key={soil} className="label">
-              <input
-                type="checkbox"
-                className="checkbox"
-                onChange={() => handleSoilChange(soil)}
-              />
-              {
-                [
-                  "Piaszczysta",
-                  "Gliniasta",
-                  "Uniwersalna",
-                  "Torfowa",
-                  "Wapienna",
-                  "Lessowa",
-                ][i]
-              }
-            </label>
-          )
-        )}
+        {(
+          ["sandy", "clay", "loamy", "peaty", "chalky", "silty"] as SoilType[]
+        ).map((soil, i) => (
+          <label key={soil} className="label">
+            <input
+              type="checkbox"
+              className="checkbox"
+              onChange={() => handleSoilChange(soil)}
+            />
+            {
+              [
+                "Piaszczysta",
+                "Gliniasta",
+                "Uniwersalna",
+                "Torfowa",
+                "Wapienna",
+                "Lessowa",
+              ][i]
+            }
+          </label>
+        ))}
       </fieldset>
 
       <fieldset className="fieldset border pl-6 p-4 grid grid-cols-2">
