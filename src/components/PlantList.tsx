@@ -48,7 +48,7 @@ export function PlantList({
               className="bg-base-200 shadow-sm rounded-xl overflow-hidden text-center cursor-grab"
               draggable
               onDragStart={(e) => {
-                e.dataTransfer.setData("plantId", plant.id.toString());
+                e.dataTransfer.setData("plantId", plant._id);
               }}
             >
               <img

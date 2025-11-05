@@ -48,7 +48,7 @@ export const plantService = {
         }
     },
 
-    async getPlantById(id: number): Promise<Plant | undefined> {
+    async getPlantById(id: string): Promise<Plant | undefined> {
         try {
             const response = await fetch(`${BASE_URL}/id/${id}`);
 

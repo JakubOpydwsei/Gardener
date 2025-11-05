@@ -3,97 +3,220 @@ import PlantFilter from "../components/PlantFilter";
 import PlantCard from "../components/PlantCard";
 import { plantService } from "../services/plantService.ts";
 import { Plant } from "../Types/plant.ts";
+import { Filters } from "../Types/filters";
 
 function PlantPage() {
-    const [showToast, setShowToast] = useState(false);
-    const [plants, setPlants] = useState<Plant[]>([])
+  const [showToast, setShowToast] = useState(false);
+  const [plants, setPlants] = useState<Plant[]>([]);
+  const [filters, setFilters] = useState<Filters>({
+    floweringSeasons: [], // done both
+    lifeLength: 0, // done both
+    plantingSeasons: [], // done both
+    soil: [], // done both
+    toxiticy: [], // done both
+    species: [], // done both
+  });
 
-    const searchHandler = () => {
-        setShowToast(true);
-        setTimeout(() => {
-            setShowToast(false);
-        }, 2000);
+  const handleFilterChange = (newFilters: typeof filters) => {
+    setFilters(newFilters);
+    console.log(newFilters);
+  };
+
+  const filteredPlants = plants.filter((plant) => {
+    const seasons = {
+      winter: { start: 12, end: 2 },
+      spring: { start: 3, end: 5 },
+      summer: { start: 6, end: 8 },
+      autumn: { start: 9, end: 11 },
     };
-    const menuHandler = searchHandler
 
-    useEffect(() => {
-        plantService.getAllPlants().then((data) => {
-            setPlants(data)
-        })
-            .catch((error) => {
-                console.log(error)
-            })
-    }, [])
+    const filteredFloweringSeasons =
+      filters.floweringSeasons.length === 0
+        ? true
+        : filters.floweringSeasons.some((season) => {
+            const { start, end } = seasons[season];
+            const { start: plantStart, end: plantEnd } = plant.floweringPeriod;
 
+            // obsługa zakresu przechodzącego przez koniec roku
+            if (start > end) {
+              return plantStart >= start || plantEnd <= end;
+            }
+            return plantStart <= end && plantEnd >= start;
+          });
+    // console.log(filteredFloweringSeasons);
+
+    const lengthMap = {
+      1: "annual",
+      2: "biennial",
+      3: "perennial",
+    };
+
+    const filteredLifeLength =
+      filters.lifeLength === 0
+        ? true
+        : plant.lifespan.includes(lengthMap[filters.lifeLength]);
+
+    const filteredPlantingSeasons =
+      filters.plantingSeasons.length === 0
+        ? true
+        : filters.plantingSeasons.some((season) => {
+            const { start, end } = seasons[season];
+            const { start: plantStart, end: plantEnd } = plant.plantingPeriod;
+
+            // obsługa zakresu przechodzącego przez koniec roku
+            if (start > end) {
+              return plantStart >= start || plantEnd <= end;
+            }
+            return plantStart <= end && plantEnd >= start;
+          });
+    console.log(filteredPlantingSeasons);
+
+    const filteredSpecies =
+      filters.species.length === 0 ||
+      filters.species.some((s) => plant.species.includes(s));
+
+    const filteredSoil =
+      filters.soil.length === 0 ||
+      filters.soil.some((s) => plant.soil.includes(s));
+
+    let filteredToxiticy = true;
+
+    if (filters.toxiticy.length !== 0 && filters.toxiticy.length !== 2) {
+      if (filters.toxiticy[0] === "save") {
+        filteredToxiticy = plant.toxicity === false;
+      }
+      if (filters.toxiticy[0] === "toxic") {
+        filteredToxiticy = plant.toxicity === true;
+      }
+    }
+    // dodać obsługę gdy zaznaczamy wiele sezonów a nie jeden, oraz wiele gleb
+    // console.log(plant.name);
+    // console.log(plant.toxicity);
+    // console.log(filteredFloweringSeasons);
+    // console.log(filteredLifeLength);
+    // console.log(filteredPlantingSeasons);
+    // console.log(filteredSoil);
+    // console.log(filteredSpecies);
     return (
-        <>
-            <div className=" flex">
-
-                {showToast && (
-                    <div className="toast toast-top toast-center z-50">
-                        <div className="alert alert-info">
-                            <span>Not implemented yet.</span>
-                        </div>
-                    </div>
-                )}
-
-                <section className="hidden  md:block w-1/4 h-fit ">
-                    <PlantFilter />
-                </section>
-
-                <section className="w-full ">
-                    <div className="flex justify-between mb-8">
-
-                        <label className="input rounded-2xl pl-3 ml-2 sm:ml-6 md:ml-8 lg:ml-34 xl:ml-74">
-                            <input type="search" required placeholder="Search" />
-                            <span className="label"><svg className="h-[1em] cursor-pointer" onClick={searchHandler} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                <g
-                                    strokeLinejoin="round"
-                                    strokeLinecap="round"
-                                    strokeWidth="2.5"
-                                    fill="none"
-                                    stroke="currentColor"
-                                >
-                                    <circle cx="11" cy="11" r="8"></circle>
-                                    <path d="m21 21-4.3-4.3"></path>
-                                </g>
-                            </svg></span>
-                        </label>
-
-                        <div className="mr-2 sm:mr-6 md:mr-8 lg:mr-14 xl:mr-24">
-                            Zaawansowane filtry
-                            <button className="btn btn-square btn-ghost" onClick={menuHandler}>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block h-5 w-5 stroke-current"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path> </svg>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div className="grid mx-4 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-
-                        {plants.map((plant: Plant) =>
-                            <PlantCard key={plant.id} plant={plant} />
-                        )}
-
-                        {plants.length === 0 &&
-                            [...Array(12)].map((_, i) => (
-                                <div key={i} className="flex flex-col gap-4 bg-base-200 shadow-sm p-4 rounded-xl">
-                                    <div className="skeleton h-46 w-full"></div>
-                                    <div className="skeleton h-6 w-full"></div>
-                                    <div className="skeleton h-12 w-full"></div>
-                                    <div className="skeleton h-6 w-full"></div>
-                                    <div className="skeleton h-7 w-full"></div>
-                                    <div className="skeleton h-9 w-full"></div>
-                                </div>
-                            ))
-                        }
-
-
-                    </div>
-
-                </section>
-            </div>
-        </>
+      filteredFloweringSeasons &&
+      filteredLifeLength &&
+      filteredPlantingSeasons &&
+      filteredSoil &&
+      filteredSpecies &&
+      filteredToxiticy
     );
+  });
+
+  // console.log({ plants });
+  console.log(filteredPlants.length);
+
+  const searchHandler = () => {
+    setShowToast(true);
+    setTimeout(() => {
+      setShowToast(false);
+    }, 2000);
+  };
+  const menuHandler = searchHandler;
+
+  useEffect(() => {
+    plantService
+      .getAllPlants()
+      .then((data) => {
+        setPlants(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  return (
+    <>
+      <div className="flex pb-6">
+        {showToast && (
+          <div className="toast toast-top toast-center z-50">
+            <div className="alert alert-info">
+              <span>Not implemented yet.</span>
+            </div>
+          </div>
+        )}
+
+        <section className="hidden  md:block lg:w-3/10 w-2/5 h-fit ">
+          <PlantFilter filters={filters} onFilterChange={handleFilterChange} />
+        </section>
+
+        <section className="w-full ">
+          <div className="flex justify-between mb-8">
+            <label className="input rounded-2xl pl-3 ml-2 sm:ml-6 md:ml-8 lg:ml-34 xl:ml-74">
+              <input type="search" required placeholder="Search" />
+              <span className="label">
+                <svg
+                  className="h-[1em] cursor-pointer"
+                  onClick={searchHandler}
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                >
+                  <g
+                    strokeLinejoin="round"
+                    strokeLinecap="round"
+                    strokeWidth="2.5"
+                    fill="none"
+                    stroke="currentColor"
+                  >
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.3-4.3"></path>
+                  </g>
+                </svg>
+              </span>
+            </label>
+
+            <div className="mr-2 sm:mr-6 md:mr-8 lg:mr-14 xl:mr-24">
+              Zaawansowane filtry
+              <button
+                className="btn btn-square btn-ghost"
+                onClick={menuHandler}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  className="inline-block h-5 w-5 stroke-current"
+                >
+                  {" "}
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 6h16M4 12h16M4 18h16"
+                  ></path>{" "}
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div className="grid mx-4 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+            {filteredPlants.map((plant: Plant) => (
+              <PlantCard key={plant._id} plant={plant} />
+            ))}
+
+            {plants.length === 0 &&
+              [...Array(12)].map((_, i) => (
+                <div
+                  key={i}
+                  className="flex flex-col gap-4 bg-base-200 shadow-sm p-4 rounded-xl"
+                >
+                  <div className="skeleton h-46 w-full"></div>
+                  <div className="skeleton h-6 w-full"></div>
+                  <div className="skeleton h-12 w-full"></div>
+                  <div className="skeleton h-6 w-full"></div>
+                  <div className="skeleton h-7 w-full"></div>
+                  <div className="skeleton h-9 w-full"></div>
+                </div>
+              ))}
+          </div>
+        </section>
+      </div>
+    </>
+  );
 }
 
 export default PlantPage;
