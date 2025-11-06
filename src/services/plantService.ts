@@ -1,6 +1,6 @@
 import { Plant } from "../Types/plant"
 
-const BASE_URL = "http://localhost:3001/plants";
+const BASE_URL = "http://192.168.6.74:3001/plants";
 
 function handleError(response: Response): never {
     let message: string;
@@ -48,7 +48,7 @@ export const plantService = {
         }
     },
 
-    async getPlantById(id: number): Promise<Plant | undefined> {
+    async getPlantById(id: string): Promise<Plant | undefined> {
         try {
             const response = await fetch(`${BASE_URL}/id/${id}`);
 
