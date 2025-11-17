@@ -6,6 +6,7 @@ import { Plant } from "../Types/plant.ts";
 import { Filters } from "../Types/filters";
 
 function PlantPage() {
+  const [isOpen, setIsOpen] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const [plants, setPlants] = useState<Plant[]>([]);
   const [filters, setFilters] = useState<Filters>({
@@ -101,7 +102,10 @@ function PlantPage() {
       setShowToast(false);
     }, 2000);
   };
-  const menuHandler = searchHandler;
+
+  const menuHandler = () => {
+    setIsOpen((prev) => !prev);
+  };
 
   useEffect(() => {
     plantService
@@ -116,7 +120,7 @@ function PlantPage() {
 
   return (
     <>
-      <div className="flex pb-6">
+      <div className="block lg:flex pb-6">
         {showToast && (
           <div className="toast toast-top toast-center z-50">
             <div className="alert alert-info">
@@ -125,14 +129,23 @@ function PlantPage() {
           </div>
         )}
 
-        <section className="hidden  md:block lg:w-3/10 w-2/5 h-fit ">
+        <section
+          className={`${
+            isOpen ? "block" : "hidden"
+          } lg:block w-full p-6 lg:p-0 lg:w-3/10 xl:w-2/5 lg:ml-1 h-fit`}
+        >
           <PlantFilter filters={filters} onFilterChange={handleFilterChange} />
         </section>
 
         <section className="w-full ">
           <div className="flex justify-between mb-8">
-            <label className="input rounded-2xl pl-3 ml-2 sm:ml-6 md:ml-8 lg:ml-34 xl:ml-74">
-              <input type="search" required placeholder="Search" />
+            <label className="input rounded-2xl m-auto md:w-5/12 lg:w-4/12 w-1/2">
+              <input
+                type="search"
+                className="pl-2"
+                required
+                placeholder="Search"
+              />
               <span className="label">
                 <svg
                   className="h-[1em] cursor-pointer"
@@ -154,12 +167,12 @@ function PlantPage() {
               </span>
             </label>
 
-            <div className="mr-2 sm:mr-6 md:mr-8 lg:mr-14 xl:mr-24">
-              Zaawansowane filtry
-              <button
-                className="btn btn-square btn-ghost"
-                onClick={menuHandler}
-              >
+            <div
+              onClick={menuHandler}
+              className="mr-2 block lg:hidden xs:bg-green-100 sm:mr-6 md:mr-8 lg:mr-14 xl:mr-24"
+            >
+              Filtry
+              <button className="btn btn-square btn-ghost">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
