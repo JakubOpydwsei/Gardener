@@ -3,7 +3,6 @@ import CanvasStage from "../components/CanvasStage";
 import { PlantList } from "../components/PlantList";
 import { Plant } from "../Types/plant";
 import { plantService } from "../services/plantService";
-import UploadPanel from "../components/UploadPanel";
 
 export interface CanvasItem {
   id: string | number;
@@ -29,26 +28,30 @@ export function GardenCreatorPage() {
   }, []);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 p-6">
-      <div className="lg:col-span-2 space-y-6">
-        <UploadPanel setBg={setBg} clearSignal={clearUpload} />
-        <PlantList
-          plants={plants}
-          loading={loading}
-          search={search}
-          setSearch={setSearch}
-        />
-      </div>
-
-      <div className="lg:col-span-3">
-        <CanvasStage
-          items={items}
-          setItems={setItems}
-          plants={plants}
-          bg={bg}
-          setBg={setBg}
-          setClearUpload={setClearUpload}
-        />
+    <div className="min-h-screen bg-base-100">
+      <div className="max-w-7xl mx-auto p-4 lg:p-6">
+        <div className="flex flex-col justify-center lg:flex-row gap-4 lg:gap-x-6 items-start">
+          <div className="flex lg:w-[520px] lg:flex-shrink-0 lg:mr-2">
+            <PlantList
+              plants={plants}
+              loading={loading}
+              search={search}
+              setSearch={setSearch}
+              setBg={setBg}
+              clearSignal={clearUpload}
+            />
+          </div>
+          <div className="w-full lg:flex-[2]">
+            <CanvasStage
+              items={items}
+              setItems={setItems}
+              plants={plants}
+              bg={bg}
+              setBg={setBg}
+              setClearUpload={setClearUpload}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
