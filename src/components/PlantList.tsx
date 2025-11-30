@@ -93,11 +93,11 @@ export function PlantList({
             {!loading &&
               filteredPlants.map((plant) => (
                 <div
-                  key={plant.id}
+                  key={plant._id}
                   className="bg-base-200 shadow-sm rounded-xl overflow-hidden text-center cursor-grab flex flex-col hover:shadow-md transition-all duration-150"
                   draggable
                   onDragStart={(e) => {
-                    e.dataTransfer.setData("plantId", plant.id.toString());
+                    e.dataTransfer.setData("plantId", plant._id.toString());
                   }}
                 >
                   <img

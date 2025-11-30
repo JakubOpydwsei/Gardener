@@ -5,22 +5,31 @@ export type Species = 'tree' | 'shrub' | 'herb' | 'flower' | 'vegetable' | 'frui
 export type WaterRequirement = 'low' | 'medium' | 'high';
 export type Sunlight = 'full sun' | 'partial shade' | 'shade';
 export type SoilPh = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14;
+export type GrowthRate = 'slow' | 'medium' | 'fast';
+export type Lifespan = 'annual' | 'biennial' | 'perennial';
+export type Peroid = {
+  start: Month;
+  end: Month;
+}
 
 export interface Plant {
-  id: number;
+  _id: string;
   name: string;
-  latinName?: string;
-  imageUrl?: string;
+  latinName: string;
+  imageUrl: string;
   species: Species;
-  soil: SoilType;
+  soil: SoilType[];
   waterRequirement: WaterRequirement;
   sunlight: Sunlight;
-  floweringPeriod: {
-    start: Month;
-    end: Month;
-  };
-  heightCm?: number;
-  color?: string;
-  compatibleWith?: string[];
-  soilPh?: SoilPh;
+  floweringPeriod: Peroid;
+  plantingPeriod: Peroid;
+  heightCm: number;
+  color: string[];
+  compatibleWith: string[];
+  soilPh: SoilPh;
+  growthRate: GrowthRate;
+  toxicity: boolean;
+  careTips: string;
+  temp: { min: number; max: number };
+  lifespan: Lifespan;
 }
