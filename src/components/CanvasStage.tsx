@@ -20,7 +20,6 @@ export default function CanvasStage({
   items,
   setItems,
   plants,
-  className,
   setClearUpload,
 }: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -34,16 +33,26 @@ export default function CanvasStage({
 
   const [selectedId, setSelectedId] = useState<string | number | null>(null);
   const [dragging, setDragging] = useState(false);
+  const [bgSize, setBgSize] = useState<{
+    width: number;
+    height: number;
+  } | null>(null);
+
+  const [showGrid, setShowGrid] = useState(true);
+  const [smooth, setSmooth] = useState(true);
+  const [plantSize, setPlantSize] = useState(56);
 
   useEffect(() => {
     if (!bg) {
       bgImageRef.current = null;
+      setBgSize(null);
       redraw();
       return;
     }
     const img = new Image();
     img.onload = () => {
       bgImageRef.current = img;
+      setBgSize({ width: img.width, height: img.height });
       redraw();
     };
     img.onerror = () => console.error("Nie udało się wczytać obrazu.");
@@ -60,6 +69,7 @@ export default function CanvasStage({
         const img = new Image();
         img.src = item.plant.imageUrl!;
         img.onload = () => redraw();
+        img.src = item.plant.imageUrl!;
         plantImagesRef.current.set(item.id, img);
       }
     });
@@ -83,7 +93,11 @@ export default function CanvasStage({
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [selectedId, items]);
+  }, [selectedId, items, setItems]);
+
+  useEffect(() => {
+    redraw();
+  }, [items, plantSize, showGrid, smooth, bgSize, bg]);
 
   const redraw = (itemsToDraw?: CanvasItem[]) => {
     const canvas = canvasRef.current;
@@ -106,7 +120,7 @@ export default function CanvasStage({
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    drawCheckerboard(ctx, cssWidth, cssHeight);
+    if (showGrid) drawCheckerboard(ctx, cssWidth, cssHeight);
 
     const bgImg = bgImageRef.current;
     if (bgImg) {
@@ -115,8 +129,8 @@ export default function CanvasStage({
       const drawH = bgImg.height * scale;
       const dx = (cssWidth - drawW) / 2;
       const dy = (cssHeight - drawH) / 2;
-      ctx.imageSmoothingEnabled = true;
-      ctx.imageSmoothingQuality = "high";
+      ctx.imageSmoothingEnabled = smooth;
+      ctx.imageSmoothingQuality = smooth ? "high" : "low";
       ctx.drawImage(bgImg, dx, dy, drawW, drawH);
     }
 
@@ -124,7 +138,7 @@ export default function CanvasStage({
     drawItems.forEach((item) => {
       const img = plantImagesRef.current.get(item.id);
       if (!img) return;
-      const size = 48;
+      const size = plantSize;
       const x = item.x;
       const y = item.y;
 
@@ -137,7 +151,7 @@ export default function CanvasStage({
       ctx.restore();
 
       if (item.id === selectedId) {
-        ctx.strokeStyle = "black";
+        ctx.strokeStyle = "#111827";
         ctx.lineWidth = 2;
         ctx.beginPath();
         ctx.arc(x, y, size / 2, 0, Math.PI * 2);
@@ -184,7 +198,7 @@ export default function CanvasStage({
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     const plantId = e.dataTransfer.getData("plantId");
-    const plant = plants.find((p) => p.id.toString() === plantId);
+    const plant = plants.find((p) => p._id.toString() === plantId);
     if (!plant || !containerRef.current) return;
     setItems((prev) => [
       ...prev,
@@ -215,7 +229,7 @@ export default function CanvasStage({
     const clickY = e.clientY - rect.top;
 
     const clickedItem = items.find(
-      (item) => Math.hypot(clickX - item.x, clickY - item.y) <= 24
+      (item) => Math.hypot(clickX - item.x, clickY - item.y) <= plantSize / 2
     );
     if (clickedItem) handleClickPlant(clickedItem.id);
     else {
@@ -231,6 +245,7 @@ export default function CanvasStage({
     setSelectedId(null);
     bgImageRef.current = null;
     plantImagesRef.current.clear();
+    setBgSize(null);
     redraw([]);
     if (setClearUpload) setClearUpload((prev) => !prev);
   };
@@ -239,6 +254,9 @@ export default function CanvasStage({
     const state = {
       bg,
       items,
+      plantSize,
+      showGrid,
+      smooth,
     };
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(state));
     alert("Stan został zapisany");
@@ -254,54 +272,157 @@ export default function CanvasStage({
       setItems(parsed.items);
 
       plantImagesRef.current.clear();
+
+      const loadPromises: Promise<void>[] = [];
+
       parsed.items.forEach((item: CanvasItem) => {
         const img = new Image();
+        const p = new Promise<void>((resolve) => {
+          img.onload = () => {
+            resolve();
+          };
+          img.onerror = () => {
+            console.log("Nie udało się wczytać obrazka rośliny", item);
+            resolve();
+          };
+        });
         img.src = item.plant.imageUrl!;
-        img.onload = () => redraw();
         plantImagesRef.current.set(item.id, img);
+        loadPromises.push(p);
       });
-
-      redraw(parsed.items);
+      Promise.all(loadPromises).then(() => {
+        requestAnimationFrame(() => {
+          redraw(parsed.items);
+        });
+      });
     }
+
+    if (typeof parsed.plantSize === "number") setPlantSize(parsed.plantSize);
+    if (typeof parsed.showGrid === "boolean") setShowGrid(parsed.showGrid);
+    if (typeof parsed.smooth === "boolean") setSmooth(parsed.smooth);
     alert("Stan załadowany");
   };
 
-  return (
-    <div className="flex flex-col gap-2">
-      <div className="flex gap-2 justify-center mt-2">
-        <button
-          onClick={handleRemoveBackground}
-          className="px-4 py-2 bg-red-500 text-white rounded w-max"
-        >
-          Wyczyść
-        </button>
-        <button
-          onClick={handleSaveState}
-          className="px-4 py-2 bg-blue-500 text-white rounded w-max"
-        >
-          Zapisz
-        </button>
-        <button
-          onClick={handleLoadState}
-          className="px-4 py-2 bg-green-500 text-white rounded w-max"
-        >
-          Wczytaj
-        </button>
-      </div>
+  const handleExportPNG = () => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const url = canvas.toDataURL("image/png");
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "garden.png";
+    a.click();
+  };
 
+  return (
+    <div className="flex flex-col justify-center">
       <div
         ref={containerRef}
-        className={`relative w-full h-[65vh] rounded-xl overflow-hidden ${
-          className ?? ""
-        }`}
-        style={{ backgroundColor: "#f3f4f6", border: "1px solid #e5e7eb" }}
+        className={`relative w-full rounded-xl overflow-hidden ${
+          !bgSize ? "h-[70vh]" : ""
+        } border border-base-300`}
+        style={{
+          backgroundColor: "#f3f4f6",
+          aspectRatio: bgSize
+            ? `${bgSize.width} / ${bgSize.height}`
+            : undefined,
+        }}
         onDragOver={(e) => e.preventDefault()}
         onDrop={handleDrop}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onClick={handleCanvasClick}
       >
+        {!bg && items.length === 0 && (
+          <div className="absolute inset-0 grid place-items-center text-base-content/70">
+            <div className="bg-base-100/80 backdrop-blur p-4 rounded-lg border border-base-300 text-center">
+              <p className="font-medium">
+                Przed rozpoczęciem wgraj obraz działki
+              </p>
+              <p className="text-sm mt-1">
+                Przeciągnij rośliny z panelu po lewej
+              </p>
+            </div>
+          </div>
+        )}
         <canvas ref={canvasRef} className="block w-full h-full" />
+      </div>
+
+      <div className="flex flex-wrap gap-3 items-center justify-center mt-6">
+        <div className="flex items-center gap-2 bg-base-200 rounded-lg px-3 py-2">
+          <span className="text-sm">Rozmiar roślin</span>
+          <input
+            type="range"
+            min={32}
+            max={96}
+            value={plantSize}
+            onChange={(e) => {
+              setPlantSize(parseInt(e.target.value, 10));
+              redraw();
+            }}
+            className="range range-xs"
+          />
+          <span className="text-sm w-10 text-right">{plantSize}px</span>
+        </div>
+
+        <div className="flex items-center gap-2 bg-base-200 rounded-lg px-3 py-2">
+          <label className="label cursor-pointer">
+            <span className="label-text mr-2">Siatka</span>
+            <input
+              type="checkbox"
+              className="toggle toggle-sm"
+              checked={showGrid}
+              onChange={(e) => {
+                setShowGrid(e.target.checked);
+                redraw();
+              }}
+            />
+          </label>
+        </div>
+
+        <div className="flex items-center gap-2 bg-base-200 rounded-lg px-3 py-2">
+          <label className="label cursor-pointer">
+            <span className="label-text mr-2">Wygładzanie</span>
+            <input
+              type="checkbox"
+              className="toggle toggle-sm"
+              checked={smooth}
+              onChange={(e) => {
+                setSmooth(e.target.checked);
+                redraw();
+              }}
+            />
+          </label>
+        </div>
+
+        <button
+          onClick={handleSaveState}
+          className="btn btn-primary text-black"
+          title="Zapisz projekt"
+        >
+          Zapisz
+        </button>
+
+        <button
+          onClick={handleLoadState}
+          className="btn btn-success text-black"
+          title="Wczytaj zapisany projekt"
+        >
+          Wczytaj
+        </button>
+        <button
+          onClick={handleRemoveBackground}
+          className="btn btn-error text-black"
+          title="Wyczyść płótno i tło"
+        >
+          Wyczyść
+        </button>
+        <button
+          onClick={handleExportPNG}
+          className="btn"
+          title="Eksportuj obraz płótna do PNG"
+        >
+          Eksport PNG
+        </button>
       </div>
     </div>
   );
