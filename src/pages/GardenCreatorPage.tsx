@@ -29,9 +29,9 @@ export function GardenCreatorPage() {
 
   return (
     <div className="min-h-screen bg-base-100">
-      <div className="max-w-7xl mx-auto p-4 lg:p-6">
-        <div className="flex flex-col justify-center lg:flex-row gap-4 lg:gap-x-6 items-start">
-          <div className="flex lg:w-[520px] lg:flex-shrink-0 lg:mr-2">
+      <div className="max-w-7xl mx-auto px-4 py-4 lg:px-6 lg:py-6">
+        <div className="flex flex-col gap-4 xl:flex-row xl:items-start xl:gap-6">
+          <div className="w-full max-x-xl mx-auto xl:mx-0 xl:w-[360px] xl:flex-shrink-0">
             <PlantList
               plants={plants}
               loading={loading}
@@ -41,7 +41,7 @@ export function GardenCreatorPage() {
               clearSignal={clearUpload}
             />
           </div>
-          <div className="w-full lg:flex-[2]">
+          <div className="w-full max-w-3xl mx-auto xl:mx-0 xl:flex-1">
             <CanvasStage
               items={items}
               setItems={setItems}

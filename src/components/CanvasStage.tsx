@@ -69,6 +69,7 @@ export default function CanvasStage({
         const img = new Image();
         img.src = item.plant.imageUrl!;
         img.onload = () => redraw();
+        img.src = item.plant.imageUrl!;
         plantImagesRef.current.set(item.id, img);
       }
     });
@@ -92,7 +93,11 @@ export default function CanvasStage({
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [selectedId, items]);
+  }, [selectedId, items, setItems]);
+
+  useEffect(() => {
+    redraw();
+  }, [items, plantSize, showGrid, smooth, bgSize, bg]);
 
   const redraw = (itemsToDraw?: CanvasItem[]) => {
     const canvas = canvasRef.current;
@@ -193,7 +198,7 @@ export default function CanvasStage({
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     const plantId = e.dataTransfer.getData("plantId");
-    const plant = plants.find((p) => p.id.toString() === plantId);
+    const plant = plants.find((p) => p._id.toString() === plantId);
     if (!plant || !containerRef.current) return;
     setItems((prev) => [
       ...prev,
@@ -267,18 +272,34 @@ export default function CanvasStage({
       setItems(parsed.items);
 
       plantImagesRef.current.clear();
+
+      const loadPromises: Promise<void>[] = [];
+
       parsed.items.forEach((item: CanvasItem) => {
         const img = new Image();
+        const p = new Promise<void>((resolve) => {
+          img.onload = () => {
+            resolve();
+          };
+          img.onerror = () => {
+            console.log("Nie udało się wczytać obrazka rośliny", item);
+            resolve();
+          };
+        });
         img.src = item.plant.imageUrl!;
-        img.onload = () => redraw();
         plantImagesRef.current.set(item.id, img);
+        loadPromises.push(p);
       });
-
-      redraw(parsed.items);
+      Promise.all(loadPromises).then(() => {
+        requestAnimationFrame(() => {
+          redraw(parsed.items);
+        });
+      });
     }
+
     if (typeof parsed.plantSize === "number") setPlantSize(parsed.plantSize);
-    if (typeof parsed.showGrid === "boolean") setPlantSize(parsed.showGrid);
-    if (typeof parsed.smooth === "boolean") setPlantSize(parsed.smooth);
+    if (typeof parsed.showGrid === "boolean") setShowGrid(parsed.showGrid);
+    if (typeof parsed.smooth === "boolean") setSmooth(parsed.smooth);
     alert("Stan załadowany");
   };
 
@@ -315,7 +336,7 @@ export default function CanvasStage({
           <div className="absolute inset-0 grid place-items-center text-base-content/70">
             <div className="bg-base-100/80 backdrop-blur p-4 rounded-lg border border-base-300 text-center">
               <p className="font-medium">
-                Wgraj tło ogrodu lub zacznij od pustego płótna
+                Przed rozpoczęciem wgraj obraz działki
               </p>
               <p className="text-sm mt-1">
                 Przeciągnij rośliny z panelu po lewej
@@ -375,7 +396,7 @@ export default function CanvasStage({
 
         <button
           onClick={handleSaveState}
-          className="btn btn-primary"
+          className="btn btn-primary text-black"
           title="Zapisz projekt"
         >
           Zapisz
@@ -383,14 +404,14 @@ export default function CanvasStage({
 
         <button
           onClick={handleLoadState}
-          className="btn btn-success"
+          className="btn btn-success text-black"
           title="Wczytaj zapisany projekt"
         >
           Wczytaj
         </button>
         <button
           onClick={handleRemoveBackground}
-          className="btn btn-error"
+          className="btn btn-error text-black"
           title="Wyczyść płótno i tło"
         >
           Wyczyść
