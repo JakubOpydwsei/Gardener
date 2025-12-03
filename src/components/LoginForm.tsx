@@ -7,7 +7,7 @@ const LoginSchema = z.object({
   email: z.string().email({ message: "Nieprawidłowy adres email" }),
   password: z
     .string()
-    .min(6, { message: "Hasło musi mieć co najmniej 6 znaków" }),
+    .min(8, { message: "Hasło musi mieć co najmniej 8 znaków" }),
   remember: z.boolean().optional(),
 });
 

@@ -10,7 +10,9 @@ const RegisterSchema = z
     password: z
       .string()
       .min(8, { message: "Hasło musi mieć co najmniej 8 znaków" }),
-    passwordConfirm: z.string().min(8),
+    passwordConfirm: z
+      .string()
+      .min(8, { message: "Hasło musi mieć co najmniej 8 znaków" }),
   })
   .refine((data) => data.password === data.passwordConfirm, {
     path: ["passwordConfirm"],

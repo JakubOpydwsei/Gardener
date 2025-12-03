@@ -9,9 +9,6 @@ import { useEffect } from "react";
 import { GardenCreatorPage } from "./pages/GardenCreatorPage";
 import AboutProjectPage from "./pages/AboutProjectPage";
 import HomePage from "./pages/HomePage";
-import LoginForm from "./components/LoginForm";
-import RegisterForm from "./components/RegisterForm";
-import AuthPage from "./components/AuthPage";
 
 function App() {
   useEffect(() => {
@@ -28,9 +25,6 @@ function App() {
             <Route path="/encyklopedia" element={<PlantPage />} />
             <Route path="/plant/:id" element={<PlantInfoPage />} />
             <Route path="/about-project" element={<AboutProjectPage />} />
-            <Route path="/login-form" element={<LoginForm />} />
-            <Route path="/register-form" element={<RegisterForm />} />
-            <Route path="/go-login" element={<AuthPage />} />
             <Route path="*" element={<h1>404 - Nie znaleziono strony</h1>} />
           </Route>
         </Routes>
