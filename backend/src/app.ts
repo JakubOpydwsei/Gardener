@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import plantsRouter from "./routes/PlantsRoutes";
+import authRouter from "./routes/AuthRoutes";
 
 export function createServer() {
   const app = express();
@@ -19,6 +20,7 @@ export function createServer() {
   });
 
   app.use("/plants", plantsRouter);
+  app.use("/auth", authRouter);
 
 
   return app;

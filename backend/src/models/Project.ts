@@ -11,6 +11,7 @@ export interface Project extends Document {
   name: string;
   description: string;
   items: Item[];
+  owner: Schema.Types.ObjectId;
 }
 
 const ItemSchema = new Schema<Item>(
@@ -27,7 +28,8 @@ const ProjectSchema = new Schema<Project>(
   {
     name: { type: String, required: true, trim: true },
     description: { type: String, default: "" },
-    items: [ItemSchema]
+    items: [ItemSchema],
+    owner: { type: Schema.Types.ObjectId, ref: 'User', required: true }
   },
   { timestamps: true }
 );
