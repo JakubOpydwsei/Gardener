@@ -11,7 +11,7 @@ export const register = asyncHandler(async (req: Request, res: Response) => {
         return res.status(400).json({ error: "Username and password are required." });
     }
 
-    const existingUser = await UserModel.findOne({ username });
+    const existingUser = await UserModel.findOne({ email: username });
     if (existingUser) {
         return res.status(409).json({ error: "User with this username already exists." });
     }
@@ -22,7 +22,7 @@ export const register = asyncHandler(async (req: Request, res: Response) => {
     const sessionToken = crypto.randomBytes(32).toString('hex');
 
     const newUser = await UserModel.create({ 
-        username, 
+        email: username, 
         passwordHash,
         sessionToken
     });
@@ -38,7 +38,7 @@ export const register = asyncHandler(async (req: Request, res: Response) => {
 export const login = asyncHandler(async (req: Request, res: Response) => {
     const { username, password } = req.body;
 
-    const user = await UserModel.findOne({ username });
+    const user = await UserModel.findOne({ email: username });
     
     if (!user || !(await user.comparePassword(password))) {
         return res.status(401).json({ error: "Invalid username or password" });
@@ -52,6 +52,6 @@ export const login = asyncHandler(async (req: Request, res: Response) => {
     res.json({ 
         token: sessionToken, 
         userId: user._id, 
-        username: user.username 
+        username: user.email 
     });
 });
