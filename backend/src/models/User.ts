@@ -2,14 +2,21 @@ import { Schema, model, Document } from "mongoose";
 import bcrypt from "bcrypt";
 
 export interface User extends Document {
-    username: string;
+    email: string;
     passwordHash: string;
     sessionToken?: string; 
     comparePassword: (password: string) => Promise<boolean>;
 }
 
 const UserSchema = new Schema<User>({
-    username: { type: String, required: true, unique: true },
+    email: { 
+        type: String, 
+        required: true, 
+        unique: true, 
+        lowercase: true,
+        trim: true,
+        match: [/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, 'Wprowadzony email jest nieprawidłowy']
+    },
     passwordHash: { type: String, required: true },
     sessionToken: { type: String, unique: true, sparse: true } 
 });
