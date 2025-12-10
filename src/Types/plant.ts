@@ -12,7 +12,7 @@ export type Peroid = {
   end: Month;
 }
 
-export interface Plant {
+export type Plant = {
   _id: string;
   name: string;
   latinName: string;
@@ -20,6 +20,7 @@ export interface Plant {
   species: Species;
   soil: SoilType[];
   waterRequirement: WaterRequirement;
+  wateringDesc: string;
   sunlight: Sunlight;
   floweringPeriod: Peroid;
   plantingPeriod: Peroid;
