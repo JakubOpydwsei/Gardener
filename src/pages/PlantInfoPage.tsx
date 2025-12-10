@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Plant } from "../types/plant";
+import { Plant } from "../Types/plant";
 import { plantService } from "../services/plantService";
 import { useParams } from "react-router-dom";
 import { plantSpeciesMap } from "../utils/mappings/plantSpeciesMap";
