@@ -7,6 +7,8 @@ import { Filters } from "../Types/filters";
 
 function PlantPage() {
   const [isOpen, setIsOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+
   const [showToast, setShowToast] = useState(false);
   const [plants, setPlants] = useState<Plant[]>([]);
   const [filters, setFilters] = useState<Filters>({
@@ -29,6 +31,10 @@ function PlantPage() {
       summer: { start: 6, end: 8 },
       autumn: { start: 9, end: 11 },
     } as const;
+
+    const filteredName =
+      searchQuery.trim() === "" ||
+      plant.name.toLowerCase().includes(searchQuery.toLowerCase());
 
     const filteredFloweringSeasons =
       filters.floweringSeasons.length === 0
@@ -92,7 +98,8 @@ function PlantPage() {
       filteredPlantingSeasons &&
       filteredSoil &&
       filteredSpecies &&
-      filteredToxiticy
+      filteredToxiticy &&
+      filteredName
     );
   });
 
@@ -145,6 +152,8 @@ function PlantPage() {
                 className="pl-2"
                 required
                 placeholder="Search"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
               />
               <span className="label">
                 <svg
