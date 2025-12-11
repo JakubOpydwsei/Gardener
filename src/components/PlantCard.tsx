@@ -18,7 +18,7 @@ function PlantCard({ plant }: { plant: Plant }) {
   return (
     <div key={plant._id} className="card bg-base-200 shadow-sm h-fit">
       <div tabIndex={0} className="collapse">
-        <div className="collapse-title p-0">
+        <div className="collapse-title p-0 xl:min-h-90">
           <figure className="p-3 rounded-xl">
             <img
               src={plant.imageUrl}
