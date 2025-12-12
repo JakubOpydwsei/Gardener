@@ -15,11 +15,7 @@ function Navbar() {
     <nav className="bg-emerald-50 shadow-md w-full sticky top-0 z-50">
       <div className="max-w-full mx-auto px-2 sm:px-4 md:px-6 lg:px-12 flex items-center h-20">
         <div className="flex items-center space-x-3 sm:space-x-4">
-          <img
-            src="/images/logo.png"
-            alt="logo"
-            className="h-16 sm:h-20 lg:h-20"
-          />
+          <img src="/logo.png" alt="logo" className="h-16 sm:h-20 lg:h-20" />
           <Link
             to="/"
             className="text-lg sm:text-xl md:text-2xl font-bold text-green-500 whitespace-nowrap pr-18"

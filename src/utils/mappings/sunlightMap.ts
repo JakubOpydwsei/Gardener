@@ -1,4 +1,4 @@
-import { Sunlight } from "../../types/plant";
+import { Sunlight } from "../../Types/plant";
 
 export const sunlightMap: Record<Sunlight, string> = {
     "full sun": "Pełne słońce",

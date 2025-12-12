@@ -1,4 +1,4 @@
-import { Species } from "../../types/plant";
+import { Species } from "../../Types/plant";
 
 export const plantSpeciesMap: Record<Species, string> = {
   tree: "Drzewo",
