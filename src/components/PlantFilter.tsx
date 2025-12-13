@@ -52,7 +52,10 @@ function PlantFilter({ filters, onFilterChange }: Props) {
     <div>
       <strong>Filtry</strong>
 
-      <fieldset className="fieldset border pl-6 p-4 grid grid-cols-2">
+      <fieldset
+        className="fieldset border pl-6 p-4 grid grid-cols-2"
+        data-testid="filter-flowering"
+      >
         <legend className="fieldset-legend">Rośliny kwitnące</legend>
         {["winter", "spring", "summer", "autumn"].map((season, i) => (
           <label key={season} className="label">
@@ -66,7 +69,7 @@ function PlantFilter({ filters, onFilterChange }: Props) {
         ))}
       </fieldset>
 
-      <fieldset className="fieldset border p-4">
+      <fieldset className="fieldset border p-4" data-testid="filter-lifespan">
         <legend className="fieldset-legend">Długość życia</legend>
         <input
           type="range"
@@ -85,7 +88,10 @@ function PlantFilter({ filters, onFilterChange }: Props) {
         </div>
       </fieldset>
 
-      <fieldset className="fieldset border pl-6 p-4 grid grid-cols-2">
+      <fieldset
+        className="fieldset border pl-6 p-4 grid grid-cols-2"
+        data-testid="filter-planting"
+      >
         <legend className="fieldset-legend">Rośliny sadzone</legend>
         {["winter", "spring", "summer", "autumn"].map((season, i) => (
           <label key={season} className="label">
@@ -99,7 +105,10 @@ function PlantFilter({ filters, onFilterChange }: Props) {
         ))}
       </fieldset>
 
-      <fieldset className="fieldset border pl-6 p-4 grid grid-cols-2">
+      <fieldset
+        className="fieldset border pl-6 p-4 grid grid-cols-2"
+        data-testid="filter-soil"
+      >
         <legend className="fieldset-legend">Typ gleby</legend>
         {(
           ["sandy", "clay", "loamy", "peaty", "chalky", "silty"] as SoilType[]
@@ -124,7 +133,10 @@ function PlantFilter({ filters, onFilterChange }: Props) {
         ))}
       </fieldset>
 
-      <fieldset className="fieldset border pl-6 p-4 grid grid-cols-2">
+      <fieldset
+        className="fieldset border pl-6 p-4 grid grid-cols-2"
+        data-testid="filter-toxicity"
+      >
         <legend className="fieldset-legend">Toksyczność</legend>
         <label className="label lg:col-span-1">
           <input
@@ -144,7 +156,10 @@ function PlantFilter({ filters, onFilterChange }: Props) {
         </label>
       </fieldset>
 
-      <fieldset className="fieldset border pl-6 p-4 grid grid-cols-2">
+      <fieldset
+        className="fieldset border pl-6 p-4 grid grid-cols-2"
+        data-testid="filter-species"
+      >
         <legend className="fieldset-legend">Rośliny</legend>
         {["tree", "shrub", "herb", "flower", "vegetable", "fruit"].map(
           (species, i) => (
