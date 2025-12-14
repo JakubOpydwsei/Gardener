@@ -5,6 +5,7 @@ export default function HomePage() {
         src="/garden.jpg"
         alt="Tło ogrodu"
         className="absolute inset-0 w-full h-full object-cover"
+        data-testid="home-welcome"
       />
 
       <div className="absolute inset-0 bg-black/50"></div>
@@ -13,7 +14,10 @@ export default function HomePage() {
         <h1 className="text-3xl md:text-5xl font-extrabold text-green-300 drop-shadow-lg">
           Witaj w aplikacji Gardener !
         </h1>
-        <p className="mt-3 text-md md:text-lg text-green-100 italic">
+        <p
+          className="mt-3 text-md md:text-lg text-green-100 italic"
+          data-testid="home-quote"
+        >
           "Nie uganiaj się za motylami, dbaj o swój ogród, a motyle same do
           Ciebie przylecą" ~ Mário Quintana
         </p>

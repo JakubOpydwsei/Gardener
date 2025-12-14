@@ -16,7 +16,7 @@ export class PlantPage extends BasePage {
     }
 
     async open() {
-        await super.open('/encyklopedia');
+        await super.open("/encyklopedia");
     }
 
     async search(name: string) {
@@ -31,7 +31,7 @@ export class PlantPage extends BasePage {
         await this.skeletons.first().waitFor({ state: "hidden" });
     }
 
-    async getPlantCardByName(plantName: string): Promise<PlantCardComponent> {
+    getPlantCardByName(plantName: string): PlantCardComponent {
         const plantCard = this.plantCards.filter({ has: this.page.getByTestId("card-title").filter({ hasText: plantName }) }).first();
 
         return new PlantCardComponent(plantCard);
