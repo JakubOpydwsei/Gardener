@@ -1,4 +1,4 @@
-import { WaterRequirement } from "../../types/plant";
+import { WaterRequirement } from "../../Types/plant";
 
 export const plantWateringMap: Record<WaterRequirement, string> = {
     low: "Niskie",

@@ -1,4 +1,4 @@
-import { Month } from "../../types/plant";
+import { Month } from "../../Types/plant";
 
 export const monthMap: Record<Month, string> = {
     1: "Styczeń",

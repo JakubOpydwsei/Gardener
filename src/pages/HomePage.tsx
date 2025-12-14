@@ -2,7 +2,7 @@ export default function HomePage() {
   return (
     <div className="relative -mt-8 flex justify-center items-center text-center min-h-screen w-full px-6 overflow-hidden">
       <img
-        src="/images/garden.jpg"
+        src="/garden.jpg"
         alt="Tło ogrodu"
         className="absolute inset-0 w-full h-full object-cover"
       />

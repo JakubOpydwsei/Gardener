@@ -1,4 +1,4 @@
-import { SoilType } from "../../types/plant";
+import { SoilType } from "../../Types/plant";
 
 export const soilTypesMap: Record<SoilType, string> = {
     sandy: "Piaszczysta",
