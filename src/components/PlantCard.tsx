@@ -16,7 +16,11 @@ function PlantCard({ plant }: { plant: Plant }) {
   };
 
   return (
-    <div key={plant._id} className="card bg-base-200 shadow-sm h-fit">
+    <div
+      key={plant._id}
+      className="card bg-base-200 shadow-sm h-fit"
+      data-testid="plant-card"
+    >
       <div tabIndex={0} className="collapse">
         <div className="collapse-title p-0 xl:min-h-90">
           <figure className="p-3 rounded-xl">
@@ -27,7 +31,9 @@ function PlantCard({ plant }: { plant: Plant }) {
             />
           </figure>
           <div className="card-body items-center text-center py-2">
-            <h2 className="card-title">{plant.name}</h2>
+            <h2 data-testid="card-title" className="card-title">
+              {plant.name}
+            </h2>
             <h3>Gatunek: {plantSpeciesMap[plant.species]}</h3>
             <h3>Nasłonecznienie: {sunlightMap[plant.sunlight]}</h3>
           </div>
@@ -52,7 +58,11 @@ function PlantCard({ plant }: { plant: Plant }) {
           </h4>
           <h4>Roślina {plant.toxicity ? "toksyczna" : "nietoksyczna"} </h4>
         </div>
-        <button className="btn btn-active" onClick={moreHandler}>
+        <button
+          className="btn btn-active"
+          onClick={moreHandler}
+          data-testid="plant-details-button"
+        >
           Szczegóły rośliny
         </button>
       </div>

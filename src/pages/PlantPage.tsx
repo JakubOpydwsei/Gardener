@@ -154,6 +154,7 @@ function PlantPage() {
                 placeholder="Search"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
+                data-testid="plant-search-input"
               />
               <span className="label">
                 <svg
@@ -211,7 +212,10 @@ function PlantPage() {
                   key={i}
                   className="flex flex-col gap-4 bg-base-200 shadow-sm p-4 rounded-xl"
                 >
-                  <div className="skeleton h-46 w-full"></div>
+                  <div
+                    className="skeleton h-46 w-full"
+                    data-testid="plant-skeleton"
+                  ></div>
                   <div className="skeleton h-6 w-full"></div>
                   <div className="skeleton h-12 w-full"></div>
                   <div className="skeleton h-6 w-full"></div>

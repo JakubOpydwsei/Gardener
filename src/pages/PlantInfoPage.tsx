@@ -40,7 +40,11 @@ function PlantInfoPage() {
   };
 
   if (!plant) {
-    return <h1 className="text-6xl">Pobieranie danych rośliny</h1>;
+    return (
+      <h1 className="text-6xl" data-testid="plant-details-loading">
+        Pobieranie danych rośliny
+      </h1>
+    );
   }
 
   return (
@@ -59,10 +63,16 @@ function PlantInfoPage() {
           </div>
         ) : (
           <div data-aos="fade-down" className="p-4">
-            <h1 className="text-5xl font-semibold text-base-content">
+            <h1
+              className="text-5xl font-semibold text-base-content"
+              data-testid="plant-details-name"
+            >
               {plant.name}
             </h1>
-            <h4 className="text-md italic text-base-content/70 my-2">
+            <h4
+              className="text-md italic text-base-content/70 my-2"
+              data-testid="plant-details-latin-name"
+            >
               {plant.latinName}
             </h4>
 
@@ -90,6 +100,7 @@ function PlantInfoPage() {
             <img
               src={plant.imageUrl}
               className="w-full object-center object-cover mx-auto"
+              data-testid="plant-details-image"
             />
           </div>
         )}
@@ -100,12 +111,20 @@ function PlantInfoPage() {
         className="p-4 sm:p-6 bg-base-200 rounded-xl border border-base-300 mt-6"
       >
         <h3 className="text-xl font-semibold mb-3">Jak dbać?</h3>
-        <p className="w-full text-base leading-relaxed">{plant.careTips}</p>
+        <p
+          className="w-full text-base leading-relaxed"
+          data-testid="plant-details-care"
+        >
+          {plant.careTips}
+        </p>
       </section>
 
       {/* Timeline */}
       <section>
-        <ul className="timeline timeline-snap-icon max-md:timeline-compact timeline-vertical overflow-hidden my-20">
+        <ul
+          className="timeline timeline-snap-icon max-md:timeline-compact timeline-vertical overflow-hidden my-20"
+          data-testid="plant-details-timeline"
+        >
           <li data-aos="fade-right">
             <div className="timeline-middle">
               <svg
@@ -323,7 +342,10 @@ function PlantInfoPage() {
       </section>
       {/* Statsy */}
       <section>
-        <div className="grid sm:grid-cols-1 md:grid-cols-2 overflow-hidden mb-20 w-full">
+        <div
+          className="grid sm:grid-cols-1 md:grid-cols-2 overflow-hidden mb-20 w-full"
+          data-testid="plant-details-stats"
+        >
           <div data-aos="fade-right" className="stat place-items-center w-full">
             <div className="stat-title">Podlewanie</div>
             <div className="stat-value">
