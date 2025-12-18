@@ -38,7 +38,10 @@ function PlantCard({ plant }: { plant: Plant }) {
             <h3>Nasłonecznienie: {sunlightMap[plant.sunlight]}</h3>
           </div>
         </div>
-        <div className="collapse-content text-sm">
+        <div
+          data-testid="plant-collapse-content"
+          className="collapse-content text-sm"
+        >
           <h4 className="pb-2">
             Gleba: {plant.soil.map((s) => soilTypesMap[s]).join(", ")}
           </h4>
