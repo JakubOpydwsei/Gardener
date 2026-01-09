@@ -10,6 +10,10 @@ import { GardenCreatorPage } from "./pages/GardenCreatorPage";
 import AboutProjectPage from "./pages/AboutProjectPage";
 import HomePage from "./pages/HomePage";
 import ScrollToTop from "./components/ScrollToTop";
+import { AuthProvider } from "./context/AuthContext";
+import RegisterForm from "./components/RegisterForm";
+import ForgotPasswordForm from "./components/ForgotPasswordForm";
+import UserLoginForm from "./components/UserLoginForm";
 
 function App() {
   useEffect(() => {
@@ -18,19 +22,24 @@ function App() {
 
   return (
     <>
-      <Router>
-        <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<HomePage />} />
-            <Route path="/garden-creator" element={<GardenCreatorPage />} />
-            <Route path="/encyklopedia" element={<PlantPage />} />
-            <Route path="/plant/:id" element={<PlantInfoPage />} />
-            <Route path="/about-project" element={<AboutProjectPage />} />
-            <Route path="*" element={<h1>404 - Nie znaleziono strony</h1>} />
-          </Route>
-        </Routes>
-      </Router>
+      <AuthProvider>
+        <Router>
+          <ScrollToTop />
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<HomePage />} />
+              <Route path="/garden-creator" element={<GardenCreatorPage />} />
+              <Route path="/encyklopedia" element={<PlantPage />} />
+              <Route path="/plant/:id" element={<PlantInfoPage />} />
+              <Route path="/about-project" element={<AboutProjectPage />} />
+              <Route path="/register-form" element={<RegisterForm />} />
+              <Route path="/forgot-password" element={<ForgotPasswordForm />} />
+              <Route path="/user-login-form" element={<UserLoginForm />} />
+              <Route path="*" element={<h1>404 - Nie znaleziono strony</h1>} />
+            </Route>
+          </Routes>
+        </Router>
+      </AuthProvider>
     </>
   );
 }

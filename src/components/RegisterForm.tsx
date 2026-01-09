@@ -1,11 +1,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
 import z from "zod";
+import { useAuth } from "../context/AuthContext";
 
 const RegisterSchema = z
   .object({
-    name: z.string().min(1, { message: "Podaj imię" }).max(50),
     email: z.string().email({ message: "Nieprawidłowy adres email" }),
     password: z
       .string()
@@ -21,119 +22,114 @@ const RegisterSchema = z
 
 type RegisterFormValues = z.infer<typeof RegisterSchema>;
 
-export default function RegisterForm({
-  onSubmit,
-}: {
-  onSubmit?: (data: RegisterFormValues) => Promise<void> | void;
-}) {
+export default function RegisterForm() {
+  const { register: registerFn } = useAuth();
   const { register, handleSubmit, formState } = useForm<RegisterFormValues>({
     resolver: zodResolver(RegisterSchema),
-    defaultValues: { name: "", email: "", password: "", passwordConfirm: "" },
+    defaultValues: { email: "", password: "", passwordConfirm: "" },
   });
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const submit = async (data: RegisterFormValues) => {
     setError(null);
     setLoading(true);
     try {
-      if (onSubmit) {
-        await onSubmit(data);
-      } else {
-        console.log("Api call here");
-      }
+      await registerFn(data.email, data.password);
+      navigate("/");
     } catch (err: any) {
-      setError(
-        err?.response?.data?.message ?? err?.message ?? "Błąd rejestracji"
-      );
+      setError(err.message);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="flex justify-center">
-      <form
-        onSubmit={handleSubmit(submit)}
-        className="border border-gray-500 w-3xl rounded-lg shadow-lg px-5 py-4 space-y-4 mt-20"
+    <div className="relative min-h-screen flex flex-col">
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="fixed inset-0 w-full h-full object-cover -z-10"
       >
-        {error && (
-          <div className="alert alert-error shadow-lg">
-            <div>
+        <source src="/register-bg.mp4" type="video/mp4" />
+        Twoja przeglądarka nie obsługuje video
+      </video>
+
+      <div className="fixed inset-0 bg-black/40 -z-5" />
+
+      <main className="flex-grow relative z-10 flex items-start justify-center pt-24 px-4">
+        <div className="relative bg-white/20 backdrop-blur-md rounded-xl shadow-2xl p-6 w-full max-w-md">
+          <h2 className="text-2xl font-bold text-center mb-2">
+            Zarejestruj się
+          </h2>
+
+          {error && (
+            <div className="alert alert-error shadow-lg">
               <span>{error}</span>
             </div>
-          </div>
-        )}
+          )}
 
-        <label className="block">
-          <span className="label-text">Imię:</span>
-          <input
-            {...register("name")}
-            type="text"
-            className="input input-bordered w-full"
-          />
-          {formState.errors.name && (
-            <p className="text-sm text-error mt-1">
-              {formState.errors.name.message}
-            </p>
-          )}
-        </label>
-        <label className="block">
-          <span className="label-text">Email:</span>
-          <input
-            {...register("email")}
-            type="email"
-            className="input input-bordered w-full"
-          />
-          {formState.errors.email && (
-            <p className="text-sm text-error mt-1">
-              {formState.errors.email.message}
-            </p>
-          )}
-        </label>
-        <label className="block">
-          <span className="label-text">Hasło:</span>
-          <input
-            {...register("password")}
-            type="password"
-            className="input input-bordered w-full"
-          />
-          {formState.errors.password && (
-            <p className="text-sm text-error mt-1">
-              {formState.errors.password.message}
-            </p>
-          )}
-        </label>
-        <label className="block">
-          <span className="label-text">Powtórz hasło:</span>
-          <input
-            {...register("passwordConfirm")}
-            type="password"
-            className="input input-bordered w-full"
-          />
-          {formState.errors.passwordConfirm && (
-            <p className="text-sm text-error mt-1">
-              {formState.errors.passwordConfirm.message}
-            </p>
-          )}
-        </label>
-        <button
-          type="submit"
-          className={`btn btn-secondary w-full ${
-            loading ? "loading" : ""
-          } mt-5`}
-          disabled={loading}
-        >
-          Zarejestruj
-        </button>
-        <div className="text-sm text-center text-muted">
-          Masz konto?{" "}
-          <a href="/login-form" className="link link-primary">
-            Zaloguj się!
-          </a>
+          <form onSubmit={handleSubmit(submit)} className="space-y-4">
+            <label className="block">
+              <span className="label-text text-white">Email:</span>
+              <input
+                {...register("email")}
+                type="email"
+                className="input input-bordered w-full bg-white/80 text-black"
+              />
+              {formState.errors.email && (
+                <p className="text-sm text-error mt-1">
+                  {formState.errors.email.message}
+                </p>
+              )}
+            </label>
+            <label className="block">
+              <span className="label-text text-white">Hasło:</span>
+              <input
+                {...register("password")}
+                type="password"
+                className="input input-bordered w-full bg-white/80 text-black"
+              />
+              {formState.errors.password && (
+                <p className="text-sm text-error mt-1">
+                  {formState.errors.password.message}
+                </p>
+              )}
+            </label>
+            <label className="block">
+              <span className="label-text text-white">Powtórz hasło:</span>
+              <input
+                {...register("passwordConfirm")}
+                type="password"
+                className="input input-bordered w-full bg-white/80 text-black"
+              />
+              {formState.errors.passwordConfirm && (
+                <p className="text-sm text-error mt-1">
+                  {formState.errors.passwordConfirm.message}
+                </p>
+              )}
+            </label>
+            <button
+              type="submit"
+              className={`btn btn-secondary w-full ${loading ? "loading" : ""}`}
+              disabled={loading}
+            >
+              Zarejestruj
+            </button>
+          </form>
+
+          <div className="text-sm text-center opacity-90 mt-2 text-white">
+            Masz konto?{" "}
+            <Link to="/user-login-form" className="link link-primary font-bold">
+              Zaloguj się!
+            </Link>
+          </div>
         </div>
-      </form>
+      </main>
     </div>
   );
 }

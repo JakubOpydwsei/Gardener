@@ -1,8 +1,11 @@
 import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 function Navbar() {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+  const { user, isAuthenticated, logout } = useAuth();
 
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
     `px-3 py-2 rounded-md transition-colors duration-200 whitespace-nowrap ${
@@ -10,6 +13,11 @@ function Navbar() {
         ? "bg-green-400 text-white"
         : "text-gray-700 hover:bg-green-200 hover:shadow-sm"
     }`;
+
+  const handleLogout = () => {
+    logout();
+    navigate("user-login-form");
+  };
 
   return (
     <nav className="bg-emerald-50 shadow-md w-full sticky top-0 z-50">
@@ -106,15 +114,27 @@ function Navbar() {
           </NavLink>
         </div>
 
-        <div className="hidden lg:flex flex-wrap gap-2 lg:gap-4">
-          <NavLink
-            to="/profil"
-            className={({ isActive }) =>
-              `text-sm sm:text-base ${navLinkClass({ isActive })}`
-            }
-          >
-            Profil
-          </NavLink>
+        <div className="hidden lg:flex items-center gap-3 ml-auto">
+          {!isAuthenticated ? (
+            <NavLink
+              to="/user-login-form"
+              className="px-5 py-3 bg-green-500 rounded-lg hover:bg-green-400 shadow-lg duration-200 transition-all"
+            >
+              Zaloguj
+            </NavLink>
+          ) : (
+            <>
+              <span className="text-sm sm:text-base font font-medium text-gray-700">
+                {user?.email.split("@")[0]}
+              </span>
+              <button
+                onClick={handleLogout}
+                className="px-3 py-2 rounded-md text-sm sm:text-base bg-red-400 text-white hover:bg-red-500 cursor-pointer transition"
+              >
+                Wyloguj
+              </button>
+            </>
+          )}
         </div>
       </div>
 
@@ -157,13 +177,31 @@ function Navbar() {
           >
             O projekcie
           </NavLink>
-          <NavLink
-            to="/profil"
-            className={navLinkClass}
-            onClick={() => setOpen(false)}
-          >
-            Profil
-          </NavLink>
+
+          {!isAuthenticated ? (
+            <NavLink
+              to="/user-login-form"
+              className={navLinkClass}
+              onClick={() => setOpen(false)}
+            >
+              Zaloguj
+            </NavLink>
+          ) : (
+            <div className="flex flex-col gap-2">
+              <span className="px-3 py-2 text-gray-700 text-sm">
+                {user?.email.split("@")[0]}
+              </span>
+              <button
+                onClick={() => {
+                  handleLogout();
+                  setOpen(false);
+                }}
+                className="px-3 py-2 rounded-md bg-red-400 text-white hover:bg-red-500 cursor-pointer"
+              >
+                Wyloguj
+              </button>
+            </div>
+          )}
         </div>
       )}
     </nav>
