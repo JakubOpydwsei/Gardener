@@ -14,6 +14,7 @@ import { AuthProvider } from "./context/AuthContext";
 import RegisterForm from "./components/RegisterForm";
 import ForgotPasswordForm from "./components/ForgotPasswordForm";
 import UserLoginForm from "./components/UserLoginForm";
+import MyPlantPage from "./pages/MyPlantsPage";
 
 function App() {
   useEffect(() => {
@@ -31,6 +32,7 @@ function App() {
               <Route path="/garden-creator" element={<GardenCreatorPage />} />
               <Route path="/encyklopedia" element={<PlantPage />} />
               <Route path="/plant/:id" element={<PlantInfoPage />} />
+              <Route path="/my-plants" element={<MyPlantPage />} />
               <Route path="/about-project" element={<AboutProjectPage />} />
               <Route path="/register-form" element={<RegisterForm />} />
               <Route path="/forgot-password" element={<ForgotPasswordForm />} />
