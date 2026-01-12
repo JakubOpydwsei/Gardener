@@ -56,7 +56,7 @@ export default function LoginForm() {
           </div>
         )}
 
-        <label className="block">
+        <label className="block mt-5">
           <span className="label-text text-white">Email:</span>
           <input
             {...register("email")}
@@ -70,7 +70,7 @@ export default function LoginForm() {
           )}
         </label>
         <label className="block">
-          <span className="label-text text-white">Password:</span>
+          <span className="label-text text-white">Hasło:</span>
           <input
             {...register("password")}
             type="password"

@@ -33,7 +33,7 @@ function Navbar() {
         </div>
 
         <button
-          className="lg:hidden p-2 rounded-md text-gray-700 hover:bg-green-100 ml-auto"
+          className="xl:hidden p-2 rounded-md text-gray-700 hover:bg-green-100 ml-auto"
           onClick={() => setOpen(!open)}
         >
           {open ? (
@@ -69,7 +69,7 @@ function Navbar() {
           )}
         </button>
 
-        <div className="hidden lg:flex lg:w-full lg:justify-between lg:mx-4 xl:justify-start xl:gap-6 xl:ml-6 flex-wrap overflow-x-auto">
+        <div className="hidden xl:flex lg:w-full lg:justify-between lg:mx-4 xl:justify-start xl:gap-6 xl:ml-6 flex-wrap overflow-x-auto">
           <NavLink
             to="/"
             end
@@ -114,7 +114,7 @@ function Navbar() {
           </NavLink>
         </div>
 
-        <div className="hidden lg:flex items-center gap-3 ml-auto">
+        <div className="hidden xl:flex items-center gap-3 ml-auto">
           {!isAuthenticated ? (
             <NavLink
               to="/user-login-form"
@@ -139,7 +139,7 @@ function Navbar() {
       </div>
 
       {open && (
-        <div className="lg:hidden flex flex-col space-y-2 px-4 pb-4">
+        <div className="xl:hidden flex flex-col space-y-2 px-4 pb-4">
           <NavLink
             to="/"
             end
@@ -188,7 +188,7 @@ function Navbar() {
             </NavLink>
           ) : (
             <div className="flex flex-col gap-2">
-              <span className="px-3 py-2 text-gray-700 text-sm">
+              <span className="px-3 py-2 text-gray-700 text-sm font font-medium">
                 {user?.email.split("@")[0]}
               </span>
               <button
