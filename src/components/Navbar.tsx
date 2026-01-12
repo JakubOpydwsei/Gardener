@@ -124,12 +124,12 @@ function Navbar() {
             </NavLink>
           ) : (
             <>
-              <span className="text-sm sm:text-base font font-medium text-gray-700">
+              <span className="text-sm sm:text-base hidden xl:block font font-medium text-gray-700">
                 {user?.email.split("@")[0]}
               </span>
               <button
                 onClick={handleLogout}
-                className="px-3 py-2 rounded-md text-sm sm:text-base bg-red-400 text-white hover:bg-red-500 cursor-pointer transition"
+                className="px-3 py-2 rounded-md text-sm sm:text-xs bg-red-400 text-white hover:bg-red-500 cursor-pointer transition"
               >
                 Wyloguj
               </button>

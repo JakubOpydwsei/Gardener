@@ -41,7 +41,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const res = await fetch("http://localhost:3001/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username: email, password }),
+      body: JSON.stringify({ email, password }),
     });
 
     if (!res.ok) {
@@ -51,20 +51,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const data = await res.json();
 
     setToken(data.token);
-    setUser({ id: data.userId, email: data.username });
+    setUser({ id: data.userId, email: data.email });
 
     const storage = remember ? localStorage : sessionStorage;
 
     storage.setItem("token", data.token);
     storage.setItem("userId", data.userId);
-    storage.setItem("email", data.username);
+    storage.setItem("email", data.email);
   };
 
   const register = async (email: string, password: string) => {
     const res = await fetch("http://localhost:3001/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username: email, password }),
+      body: JSON.stringify({ email, password }),
     });
 
     if (!res.ok) {
