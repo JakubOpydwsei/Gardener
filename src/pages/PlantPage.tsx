@@ -4,12 +4,11 @@ import PlantCard from "../components/PlantCard";
 import { plantService } from "../services/plantService.ts";
 import { Plant } from "../Types/plant.ts";
 import { Filters } from "../Types/filters";
+import { useFavorites } from "../context/FavoritesContext.tsx";
 
 function PlantPage() {
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-
-  const [showToast, setShowToast] = useState(false);
   const [plants, setPlants] = useState<Plant[]>([]);
   const [filters, setFilters] = useState<Filters>({
     floweringSeasons: [],
@@ -19,6 +18,7 @@ function PlantPage() {
     toxiticy: [],
     species: [],
   });
+  const { favorites } = useFavorites();
 
   const handleFilterChange = (newFilters: typeof filters) => {
     setFilters(newFilters);
@@ -103,13 +103,6 @@ function PlantPage() {
     );
   });
 
-  const searchHandler = () => {
-    setShowToast(true);
-    setTimeout(() => {
-      setShowToast(false);
-    }, 2000);
-  };
-
   const menuHandler = () => {
     setIsOpen((prev) => !prev);
   };
@@ -128,14 +121,6 @@ function PlantPage() {
   return (
     <>
       <div className="block lg:flex pb-6">
-        {showToast && (
-          <div className="toast toast-top toast-center z-50">
-            <div className="alert alert-info">
-              <span>Not implemented yet.</span>
-            </div>
-          </div>
-        )}
-
         <section
           className={`${
             isOpen ? "block" : "hidden"
@@ -159,7 +144,6 @@ function PlantPage() {
               <span className="label">
                 <svg
                   className="h-[1em] cursor-pointer"
-                  onClick={searchHandler}
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                 >
@@ -203,7 +187,11 @@ function PlantPage() {
 
           <div className="grid mx-4 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
             {filteredPlants.map((plant: Plant) => (
-              <PlantCard key={plant._id} plant={plant} />
+              <PlantCard
+                key={plant._id}
+                plant={plant}
+                isFavorite={favorites.some((f) => f._id === plant._id)}
+              />
             ))}
 
             {plants.length === 0 &&

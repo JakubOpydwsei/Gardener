@@ -1,9 +1,12 @@
 import LoginForm from "../components/LoginForm";
 import { useAuth } from "../context/AuthContext";
+import PlantCard from "../components/PlantCard";
+import { Plant } from "../Types/plant";
+import { useFavorites } from "../context/FavoritesContext";
 
 function MyPlantPage() {
   const { isAuthenticated } = useAuth();
-
+  const { favorites } = useFavorites();
   return (
     <div className="relative min-h-screen flex flex-col">
       {!isAuthenticated && (
@@ -25,6 +28,11 @@ function MyPlantPage() {
         {isAuthenticated ? (
           <div>
             <p>Favourite plants</p>
+            <div className="grid mx-4 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+              {favorites.map((plant: Plant) => (
+                <PlantCard key={plant._id} plant={plant} isFavorite={true} />
+              ))}
+            </div>
           </div>
         ) : (
           <div className="flex items-center justify-center min-h-screen p-4">
