@@ -119,102 +119,108 @@ function PlantPage() {
   }, []);
 
   return (
-    <>
-      <div className="block lg:flex pb-6">
-        <section
-          className={`${
-            isOpen ? "block" : "hidden"
-          } lg:block w-full p-6 lg:p-0 lg:w-3/10 xl:w-2/5 lg:ml-1 h-fit`}
-        >
-          <PlantFilter filters={filters} onFilterChange={handleFilterChange} />
-        </section>
+    <div className="block lg:flex pb-6">
+      <section
+        className={`${
+          isOpen ? "block" : "hidden"
+        } lg:block w-full p-6 lg:p-0 lg:w-3/10 xl:w-2/5 lg:ml-1 h-fit`}
+      >
+        <PlantFilter filters={filters} onFilterChange={handleFilterChange} />
+      </section>
 
-        <section className="w-full ">
-          <div className="flex justify-between mb-8">
-            <label className="input rounded-2xl m-auto md:w-5/12 lg:w-4/12 w-1/2">
-              <input
-                type="search"
-                className="pl-2"
-                required
-                placeholder="Search"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                data-testid="plant-search-input"
-              />
-              <span className="label">
-                <svg
-                  className="h-[1em] cursor-pointer"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                >
-                  <g
-                    strokeLinejoin="round"
-                    strokeLinecap="round"
-                    strokeWidth="2.5"
-                    fill="none"
-                    stroke="currentColor"
-                  >
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <path d="m21 21-4.3-4.3"></path>
-                  </g>
-                </svg>
-              </span>
-            </label>
-
-            <div
-              onClick={menuHandler}
-              className="mr-2 block lg:hidden xs:bg-green-100 sm:mr-6 md:mr-8 lg:mr-14 xl:mr-24"
-            >
-              Filtry
-              <button className="btn btn-square btn-ghost">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
+      <section className="w-full ">
+        <div className="flex justify-between mb-4">
+          <label className="input rounded-2xl m-auto md:w-5/12 lg:w-4/12 w-1/2">
+            <input
+              type="search"
+              className="pl-2"
+              required
+              placeholder="Search"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              data-testid="plant-search-input"
+            />
+            <span className="label">
+              <svg
+                className="h-[1em] cursor-pointer"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+              >
+                <g
+                  strokeLinejoin="round"
+                  strokeLinecap="round"
+                  strokeWidth="2.5"
                   fill="none"
-                  viewBox="0 0 24 24"
-                  className="inline-block h-5 w-5 stroke-current"
+                  stroke="currentColor"
                 >
-                  {" "}
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  ></path>{" "}
-                </svg>
-              </button>
-            </div>
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <path d="m21 21-4.3-4.3"></path>
+                </g>
+              </svg>
+            </span>
+          </label>
+
+          <div
+            onClick={menuHandler}
+            className="mr-2 block lg:hidden xs:bg-green-100 sm:mr-6 md:mr-8 lg:mr-14 xl:mr-24"
+          >
+            Filtry
+            <button
+              aria-label="Przycisk rozsuń/zsuń filtry"
+              className="btn btn-square btn-ghost"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                className="inline-block h-5 w-5 stroke-current"
+              >
+                {" "}
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                ></path>{" "}
+              </svg>
+            </button>
           </div>
+        </div>
+        {filteredPlants.length > 0 && (
+          <h1 className="my-2">Liczba roślin: {filteredPlants.length}</h1>
+        )}
+        {!filteredPlants.length && (
+          <h1 className="my-2">Nie odnaleziono żadnej rośliny</h1>
+        )}
+        <div className="grid mx-4 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+          {filteredPlants.map((plant: Plant) => (
+            <PlantCard
+              key={plant._id}
+              plant={plant}
+              isFavorite={favorites.some((f) => f._id === plant._id)}
+            />
+          ))}
 
-          <div className="grid mx-4 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-            {filteredPlants.map((plant: Plant) => (
-              <PlantCard
-                key={plant._id}
-                plant={plant}
-                isFavorite={favorites.some((f) => f._id === plant._id)}
-              />
-            ))}
-
-            {plants.length === 0 &&
-              [...Array(12)].map((_, i) => (
+          {plants.length === 0 &&
+            [...Array(12)].map((_, i) => (
+              <div
+                key={i}
+                className="flex flex-col gap-4 bg-base-200 shadow-sm p-4 rounded-xl"
+              >
                 <div
-                  key={i}
-                  className="flex flex-col gap-4 bg-base-200 shadow-sm p-4 rounded-xl"
-                >
-                  <div
-                    className="skeleton h-46 w-full"
-                    data-testid="plant-skeleton"
-                  ></div>
-                  <div className="skeleton h-6 w-full"></div>
-                  <div className="skeleton h-12 w-full"></div>
-                  <div className="skeleton h-6 w-full"></div>
-                  <div className="skeleton h-7 w-full"></div>
-                  <div className="skeleton h-9 w-full"></div>
-                </div>
-              ))}
-          </div>
-        </section>
-      </div>
-    </>
+                  className="skeleton h-46 w-full"
+                  data-testid="plant-skeleton"
+                ></div>
+                <div className="skeleton h-6 w-full"></div>
+                <div className="skeleton h-12 w-full"></div>
+                <div className="skeleton h-6 w-full"></div>
+                <div className="skeleton h-7 w-full"></div>
+                <div className="skeleton h-9 w-full"></div>
+              </div>
+            ))}
+        </div>
+      </section>
+    </div>
   );
 }
 

@@ -24,10 +24,10 @@ function MyPlantPage() {
           <div className="fixed inset-0 bg-black/40 -z-5" />
         </>
       )}
-      <main className="flex-grow relative z-10">
+      <div className="flex-grow relative z-10">
         {isAuthenticated ? (
           <div>
-            <p>Favourite plants</p>
+            <h1 className="text-3xl mb-3">Ulubione rośliny</h1>
             <div className="grid mx-4 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
               {favorites.map((plant: Plant) => (
                 <PlantCard key={plant._id} plant={plant} isFavorite={true} />
@@ -46,7 +46,7 @@ function MyPlantPage() {
             </div>
           </div>
         )}
-      </main>
+      </div>
     </div>
   );
 }
