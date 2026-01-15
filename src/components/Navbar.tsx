@@ -119,7 +119,7 @@ function Navbar() {
           {!isAuthenticated ? (
             <NavLink
               to="/user-login-form"
-              className="px-5 py-3 bg-green-500 rounded-lg hover:bg-green-400 shadow-lg duration-200 transition-all"
+              className="px-5 py-3 bg-green-700 rounded-lg hover:bg-green-500 shadow-lg duration-200 transition-all"
             >
               Zaloguj
             </NavLink>
@@ -130,7 +130,7 @@ function Navbar() {
               </span>
               <button
                 onClick={handleLogout}
-                className="px-4 py-3 rounded-lg text-sm bg-red-500 text-white hover:bg-red-400 cursor-pointer transition"
+                className="px-4 py-3 rounded-lg text-sm bg-red-700 text-white hover:bg-red-400 cursor-pointer transition"
               >
                 Wyloguj
               </button>
