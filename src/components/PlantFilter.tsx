@@ -72,6 +72,7 @@ function PlantFilter({ filters, onFilterChange }: Props) {
       <fieldset className="fieldset border p-4" data-testid="filter-lifespan">
         <legend className="fieldset-legend">Długość życia</legend>
         <input
+          aria-label="Długość życia rośliny"
           type="range"
           min={0}
           max="3"
