@@ -10,7 +10,7 @@ function Navbar() {
   const navLinkClass = ({ isActive }: { isActive: boolean }) =>
     `px-3 py-2 rounded-md transition-colors duration-200 whitespace-nowrap ${
       isActive
-        ? "bg-green-400 text-white"
+        ? "bg-green-400 text-emerald-900"
         : "text-gray-700 hover:bg-green-200 hover:shadow-sm"
     }`;
 
@@ -26,14 +26,15 @@ function Navbar() {
           <img src="/logo.png" alt="logo" className="h-16 sm:h-20 lg:h-20" />
           <Link
             to="/"
-            className="text-lg sm:text-xl md:text-2xl font-bold text-green-500 whitespace-nowrap pr-18"
+            className="text-lg sm:text-xl md:text-2xl font-bold text-emerald-700 whitespace-nowrap pr-18"
           >
             Gardener
           </Link>
         </div>
 
         <button
-          className="xl:hidden p-2 rounded-md text-gray-700 hover:bg-green-100 ml-auto"
+          aria-label="Przycisk menu"
+          className="lg:hidden p-2 rounded-md text-gray-700 hover:bg-green-100 ml-auto"
           onClick={() => setOpen(!open)}
         >
           {open ? (
@@ -129,7 +130,7 @@ function Navbar() {
               </span>
               <button
                 onClick={handleLogout}
-                className="px-4 py-3 rounded-lg text-sm sm:text-sm bg-red-400 text-white hover:bg-red-500 cursor-pointer transition"
+                className="px-3 py-2 rounded-md text-sm sm:text-xs bg-red-700 text-white hover:bg-red-500 cursor-pointer transition"
               >
                 Wyloguj
               </button>
@@ -196,7 +197,7 @@ function Navbar() {
                   handleLogout();
                   setOpen(false);
                 }}
-                className="px-3 py-2 rounded-md bg-red-400 text-white hover:bg-red-500 cursor-pointer"
+                className="px-3 py-2 rounded-md bg-red-700 text-white hover:bg-red-500 cursor-pointer"
               >
                 Wyloguj
               </button>
