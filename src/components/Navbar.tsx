@@ -129,7 +129,7 @@ function Navbar() {
               </span>
               <button
                 onClick={handleLogout}
-                className="px-3 py-2 rounded-md text-sm sm:text-xs bg-red-400 text-white hover:bg-red-500 cursor-pointer transition"
+                className="px-4 py-3 rounded-lg text-sm sm:text-sm bg-red-400 text-white hover:bg-red-500 cursor-pointer transition"
               >
                 Wyloguj
               </button>

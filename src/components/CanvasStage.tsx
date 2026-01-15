@@ -331,7 +331,7 @@ export default function CanvasStage({
     printWindow.document.write(`
     <html>
       <head>
-        <title>Lista roślin</title>
+        <title></title>
         <style>
           body {
             font-family: Arial, sans-serif;
