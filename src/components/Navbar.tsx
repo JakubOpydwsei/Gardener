@@ -34,7 +34,7 @@ function Navbar() {
 
         <button
           aria-label="Przycisk menu"
-          className="lg:hidden p-2 rounded-md text-gray-700 hover:bg-green-100 ml-auto"
+          className="xl:hidden p-2 rounded-md text-gray-700 hover:bg-green-100 ml-auto"
           onClick={() => setOpen(!open)}
         >
           {open ? (
@@ -130,7 +130,7 @@ function Navbar() {
               </span>
               <button
                 onClick={handleLogout}
-                className="px-3 py-2 rounded-md text-sm sm:text-xs bg-red-700 text-white hover:bg-red-500 cursor-pointer transition"
+                className="px-4 py-3 rounded-lg text-sm bg-red-500 text-white hover:bg-red-400 cursor-pointer transition"
               >
                 Wyloguj
               </button>
