@@ -313,6 +313,79 @@ export default function CanvasStage({
     a.click();
   };
 
+  const handlePrintPlantList = () => {
+    if (items.length === 0) {
+      alert("Brak roślin na płótnie");
+      return;
+    }
+
+    const plantCounts = items.reduce<Record<string, number>>((acc, item) => {
+      const name = item.plant.name;
+      acc[name] = (acc[name] || 0) + 1;
+      return acc;
+    }, {});
+
+    const printWindow = window.open("", "_blank");
+    if (!printWindow) return;
+
+    printWindow.document.write(`
+    <html>
+      <head>
+        <title></title>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            padding: 24px
+          }
+          h1 {
+            text-align: center;
+            margin-bottom: 24px;
+          }
+          table {
+            width: 100%;
+            border-collapse: collapse;
+          }
+          th, td {
+            border: 1px solid #ccc;
+            padding: 8px 12px;
+            text-align: left;
+          }
+          th {
+            background: #f3f4f6;
+          }
+        </style>
+      </head>
+      <body>
+          <h1>Lita roślin w ogrodzie</h1>
+          <table>
+          <thead>
+            <tr>
+              <th>Nazwa rośliny</th>
+              <th>Ilość</th>
+            </tr>
+          </thead>
+          <tbody>
+          ${Object.entries(plantCounts)
+            .map(
+              ([name, count]) => `
+          <tr>
+            <td>${name}</td>
+            <td>${count}</td>
+          </tr>
+          `
+            )
+            .join("")}
+    <tbody/>
+    <table/>
+      </body>
+    </html>
+    `);
+
+    printWindow.document.close();
+    printWindow.focus();
+    printWindow.print();
+  };
+
   return (
     <div className="flex flex-col justify-center">
       <div
@@ -400,6 +473,14 @@ export default function CanvasStage({
           title="Zapisz projekt"
         >
           Zapisz
+        </button>
+
+        <button
+          onClick={handlePrintPlantList}
+          className="btn btn-outline"
+          title="Drukuj listę roślin"
+        >
+          Drukuj listę roślin
         </button>
 
         <button

@@ -34,7 +34,7 @@ function Navbar() {
 
         <button
           aria-label="Przycisk menu"
-          className="lg:hidden p-2 rounded-md text-gray-700 hover:bg-green-100 ml-auto"
+          className="xl:hidden p-2 rounded-md text-gray-700 hover:bg-green-100 ml-auto"
           onClick={() => setOpen(!open)}
         >
           {open ? (
@@ -70,7 +70,7 @@ function Navbar() {
           )}
         </button>
 
-        <div className="hidden lg:flex lg:w-full lg:justify-between lg:mx-4 xl:justify-start xl:gap-6 xl:ml-6 flex-wrap overflow-x-auto">
+        <div className="hidden xl:flex lg:w-full lg:justify-between lg:mx-4 xl:justify-start xl:gap-6 xl:ml-6 flex-wrap overflow-x-auto">
           <NavLink
             to="/"
             end
@@ -115,11 +115,11 @@ function Navbar() {
           </NavLink>
         </div>
 
-        <div className="hidden lg:flex items-center gap-3 ml-auto">
+        <div className="hidden xl:flex items-center gap-3 ml-auto">
           {!isAuthenticated ? (
             <NavLink
               to="/user-login-form"
-              className="px-5 py-3 bg-green-500 rounded-lg hover:bg-green-400 shadow-lg duration-200 transition-all"
+              className="px-5 py-3 bg-green-700 rounded-lg hover:bg-green-500 shadow-lg duration-200 transition-all"
             >
               Zaloguj
             </NavLink>
@@ -130,7 +130,7 @@ function Navbar() {
               </span>
               <button
                 onClick={handleLogout}
-                className="px-3 py-2 rounded-md text-sm sm:text-xs bg-red-700 text-white hover:bg-red-500 cursor-pointer transition"
+                className="px-4 py-3 rounded-lg text-sm bg-red-700 text-white hover:bg-red-400 cursor-pointer transition"
               >
                 Wyloguj
               </button>
@@ -140,7 +140,7 @@ function Navbar() {
       </div>
 
       {open && (
-        <div className="lg:hidden flex flex-col space-y-2 px-4 pb-4">
+        <div className="xl:hidden flex flex-col space-y-2 px-4 pb-4">
           <NavLink
             to="/"
             end
@@ -189,7 +189,7 @@ function Navbar() {
             </NavLink>
           ) : (
             <div className="flex flex-col gap-2">
-              <span className="px-3 py-2 text-gray-700 text-sm">
+              <span className="px-3 py-2 text-gray-700 text-sm font font-medium">
                 {user?.email.split("@")[0]}
               </span>
               <button
