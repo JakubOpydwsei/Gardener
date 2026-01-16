@@ -29,8 +29,6 @@ function PlantInfoPage() {
     fetchPlant();
   }, [id]);
 
-  // console.log({ plant });
-
   const getMonthClass = (month: number): string => {
     if ([12, 1, 2].includes(month)) return "text-info";
     if (month >= 3 && month <= 5) return "text-accent";
@@ -156,7 +154,6 @@ function PlantInfoPage() {
                     {monthMap[plant.floweringPeriod.end]}
                   </span>
                 </div>
-                {/* <div className="stat-desc">Wypuszcza kwiaty w 2-3 seriach</div> */}
               </div>
             </div>
             <hr />
@@ -193,9 +190,6 @@ function PlantInfoPage() {
                     {monthMap[plant.plantingPeriod.end]}
                   </span>
                 </div>
-                {/* <div className="stat-desc">
-                  Sadzone w gruncie należy unikać przymrozków!
-                </div> */}
               </div>
             </div>
             <hr />
@@ -228,9 +222,6 @@ function PlantInfoPage() {
                     {plant.soil.map((s) => soilTypesMap[s]).join(", ")}
                   </span>
                 </div>
-                {/* <div className="stat-desc">
-                  Roślina preferuje piaszczyste podłoże
-                </div> */}
               </div>
             </div>
             <hr />
@@ -266,9 +257,6 @@ function PlantInfoPage() {
                 <div className="stat-value">
                   <span className="text-primary">Ph {plant.soilPh}</span>
                 </div>
-                {/* <div className="stat-desc">
-                  Preferowana lekko zasadowa ziemia
-                </div> */}
               </div>
             </div>
             <hr />
@@ -300,7 +288,6 @@ function PlantInfoPage() {
                   <span className="text-info">{plant.temp.min}°C</span> /{" "}
                   <span className="text-error">{plant.temp.max}°C</span>
                 </div>
-                {/* <div className="stat-desc">Roślina podatna na przymrozki!</div> */}
               </div>
             </div>
             <hr />
@@ -333,13 +320,13 @@ function PlantInfoPage() {
                     {sunlightMap[plant.sunlight]}
                   </span>
                 </div>
-                {/* <div className="stat-desc">Najlepiej 6-8h dziennie</div> */}
               </div>
             </div>
             <hr />
           </li>
         </ul>
       </section>
+
       {/* Statsy */}
       <section>
         <div
