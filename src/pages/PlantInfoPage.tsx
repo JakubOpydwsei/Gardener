@@ -33,7 +33,7 @@ function PlantInfoPage() {
     if ([12, 1, 2].includes(month)) return "text-info";
     if (month >= 3 && month <= 5) return "text-accent";
     if (month >= 6 && month <= 8) return "text-warning";
-    if (month >= 9 && month <= 11) return "text-warning-content";
+    if (month >= 9 && month <= 11) return "text-[#EA600B]";
     return "";
   };
 
@@ -67,12 +67,12 @@ function PlantInfoPage() {
             >
               {plant.name}
             </h1>
-            <h4
+            <h2
               className="text-md italic text-base-content/70 my-2"
               data-testid="plant-details-latin-name"
             >
               {plant.latinName}
-            </h4>
+            </h2>
 
             <p className="text-2xl">
               <span className="font-medium">Gatunek:</span>{" "}
@@ -97,6 +97,7 @@ function PlantInfoPage() {
           <div data-aos="fade-up" className="carousel py-6 max-w-128">
             <img
               src={plant.imageUrl}
+              alt={`Zdjęcie rośliny: ${plant.name}`}
               className="w-full object-center object-cover mx-auto"
               data-testid="plant-details-image"
             />
