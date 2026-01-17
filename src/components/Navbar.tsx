@@ -165,7 +165,7 @@ function Navbar() {
             Encyklopedia roślin
           </NavLink>
           <NavLink
-            to="/moje-rosliny"
+            to="/my-plants"
             className={navLinkClass}
             onClick={() => setOpen(false)}
           >

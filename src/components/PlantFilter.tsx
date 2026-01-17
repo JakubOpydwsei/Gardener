@@ -175,26 +175,6 @@ function PlantFilter({ filters, onFilterChange }: Props) {
           )
         )}
       </fieldset>
-
-      {/* <fieldset className="fieldset border pl-6 p-4 grid grid-cols-2">
-        <legend className="fieldset-legend">Rośliny</legend>
-        <label className="label">
-          <input type="checkbox" className="checkbox" />
-          Doniczkowe
-        </label>
-        <label className="label">
-          <input type="checkbox" className="checkbox" />
-          Szklarniowe
-        </label>
-        <label className="label">
-          <input type="checkbox" className="checkbox" />
-          Gruntowe
-        </label>
-        <label className="label">
-          <input type="checkbox" className="checkbox" />
-          Inne
-        </label>
-      </fieldset> */}
     </div>
   );
 }

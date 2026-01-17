@@ -29,13 +29,11 @@ function PlantInfoPage() {
     fetchPlant();
   }, [id]);
 
-  // console.log({ plant });
-
   const getMonthClass = (month: number): string => {
     if ([12, 1, 2].includes(month)) return "text-info";
     if (month >= 3 && month <= 5) return "text-accent";
     if (month >= 6 && month <= 8) return "text-warning";
-    if (month >= 9 && month <= 11) return "text-warning-content";
+    if (month >= 9 && month <= 11) return "text-[#EA600B]";
     return "";
   };
 
@@ -69,12 +67,12 @@ function PlantInfoPage() {
             >
               {plant.name}
             </h1>
-            <h4
+            <h2
               className="text-md italic text-base-content/70 my-2"
               data-testid="plant-details-latin-name"
             >
               {plant.latinName}
-            </h4>
+            </h2>
 
             <p className="text-2xl">
               <span className="font-medium">Gatunek:</span>{" "}
@@ -99,6 +97,7 @@ function PlantInfoPage() {
           <div data-aos="fade-up" className="carousel py-6 max-w-128">
             <img
               src={plant.imageUrl}
+              alt={`Zdjęcie rośliny: ${plant.name}`}
               className="w-full object-center object-cover mx-auto"
               data-testid="plant-details-image"
             />
@@ -156,7 +155,6 @@ function PlantInfoPage() {
                     {monthMap[plant.floweringPeriod.end]}
                   </span>
                 </div>
-                {/* <div className="stat-desc">Wypuszcza kwiaty w 2-3 seriach</div> */}
               </div>
             </div>
             <hr />
@@ -193,9 +191,6 @@ function PlantInfoPage() {
                     {monthMap[plant.plantingPeriod.end]}
                   </span>
                 </div>
-                {/* <div className="stat-desc">
-                  Sadzone w gruncie należy unikać przymrozków!
-                </div> */}
               </div>
             </div>
             <hr />
@@ -228,9 +223,6 @@ function PlantInfoPage() {
                     {plant.soil.map((s) => soilTypesMap[s]).join(", ")}
                   </span>
                 </div>
-                {/* <div className="stat-desc">
-                  Roślina preferuje piaszczyste podłoże
-                </div> */}
               </div>
             </div>
             <hr />
@@ -266,9 +258,6 @@ function PlantInfoPage() {
                 <div className="stat-value">
                   <span className="text-primary">Ph {plant.soilPh}</span>
                 </div>
-                {/* <div className="stat-desc">
-                  Preferowana lekko zasadowa ziemia
-                </div> */}
               </div>
             </div>
             <hr />
@@ -300,7 +289,6 @@ function PlantInfoPage() {
                   <span className="text-info">{plant.temp.min}°C</span> /{" "}
                   <span className="text-error">{plant.temp.max}°C</span>
                 </div>
-                {/* <div className="stat-desc">Roślina podatna na przymrozki!</div> */}
               </div>
             </div>
             <hr />
@@ -333,13 +321,13 @@ function PlantInfoPage() {
                     {sunlightMap[plant.sunlight]}
                   </span>
                 </div>
-                {/* <div className="stat-desc">Najlepiej 6-8h dziennie</div> */}
               </div>
             </div>
             <hr />
           </li>
         </ul>
       </section>
+
       {/* Statsy */}
       <section>
         <div

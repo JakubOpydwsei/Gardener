@@ -16,7 +16,7 @@ export const FavoritesProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [favorites, setFavorites] = useState<Plant[]>([]);
-  const { user, token } = useAuth(); // Twój istniejący auth
+  const { user, token } = useAuth();
 
   useEffect(() => {
     if (!user || !token) return;
