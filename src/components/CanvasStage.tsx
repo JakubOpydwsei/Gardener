@@ -50,6 +50,7 @@ export default function CanvasStage({
       return;
     }
     const img = new Image();
+    img.crossOrigin = "anonymous";
     img.onload = () => {
       bgImageRef.current = img;
       setBgSize({ width: img.width, height: img.height });
@@ -67,6 +68,7 @@ export default function CanvasStage({
     items.forEach((item) => {
       if (!plantImagesRef.current.has(item.id)) {
         const img = new Image();
+        img.crossOrigin = "anonymous";
         img.src = item.plant.imageUrl!;
         img.onload = () => redraw();
         img.src = item.plant.imageUrl!;
@@ -277,6 +279,7 @@ export default function CanvasStage({
 
       parsed.items.forEach((item: CanvasItem) => {
         const img = new Image();
+        img.crossOrigin = "anonymous";
         const p = new Promise<void>((resolve) => {
           img.onload = () => {
             resolve();
