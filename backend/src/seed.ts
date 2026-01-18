@@ -8,7 +8,7 @@ const plants = [
   {
     name: 'Róża ogrodowa',
     latinName: 'Rosa',
-    imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/2/23/Rose_flower.jpg',
+    imageUrl: 'https://mrowka.com.pl/files/BlockImage2/ubnj3np0io1lrl/image-body-1.jpg?1607504404',
     species: 'shrub',
     soil: ['loamy', 'silty'],
     waterRequirement: 'medium',
@@ -31,7 +31,7 @@ const plants = [
     name: 'Lawenda wąskolistna',
     latinName: 'Lavandula angustifolia',
     imageUrl:
-      'https://upload.wikimedia.org/wikipedia/commons/5/58/Lavandula_angustifolia_001.JPG',
+      'https://myjki.com/img/blog/2025-02/16.jpg',
     species: 'herb',
     soil: ['chalky', 'sandy', 'loamy'],
     waterRequirement: 'low',
@@ -54,7 +54,7 @@ const plants = [
     name: 'Tawuła japońska',
     latinName: 'Spiraea japonica',
     imageUrl:
-      'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Spiraea_x_bumalda.JPG/1280px-Spiraea_x_bumalda.JPG',
+      'https://upload.wikimedia.org/wikipedia/commons/d/d6/Spiraea_x_bumalda.JPG',
     species: 'shrub',
     soil: ['loamy', 'silty'],
     waterRequirement: 'medium',
@@ -76,7 +76,7 @@ const plants = [
   {
   name: 'Hortensja ogrodowa',
   latinName: 'Hydrangea macrophylla',
-  imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/5/5e/Hydrangea_macrophylla_01.jpg',
+  imageUrl: 'https://zielonyogrod.pl/hpeciai/d7ad34491f99b8f01e7b6f597423fac6/pol_pl_Hortensja-ogrodowa-Deutschland-184576_1.jpg',
   species: 'shrub',
   soil: ['silty', 'loamy'],
   waterRequirement: 'high',
@@ -97,7 +97,7 @@ const plants = [
 {
   name: 'Hosta (Funkia)',
   latinName: 'Hosta',
-  imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/6/68/Hosta_undulata.jpg',
+  imageUrl: 'https://lawendoweogrody.com/539-thickbox_default/funkia-hosta-queen-josephine.jpg',
   species: 'herb',
   soil: ['loamy', 'silty'],
   waterRequirement: 'medium',
@@ -118,7 +118,7 @@ const plants = [
 {
   name: 'Żurawka ogrodowa',
   latinName: 'Heuchera',
-  imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/4/4e/Heuchera_villosa.jpg',
+  imageUrl: 'https://zielonyexpert.pl/wp-content/uploads/2022/03/Zurawka-ogrodowa-Peach-Tea.jpg',
   species: 'herb',
   soil: ['loamy', 'sandy'],
   waterRequirement: 'medium',
@@ -129,7 +129,7 @@ const plants = [
   heightCm: 45,
   color: ['czerwony', 'zielony', 'bordowy', 'pomarańczowy'],
   compatibleWith: ['Hosta', 'Brunnera'],
-  soilPh: 6.5,
+  soilPh: 6,
   growthRate: 'medium',
   toxicity: false,
   careTips: 'Co kilka lat odmładzaj kępę, dzieląc ją na wiosnę.',
@@ -139,7 +139,7 @@ const plants = [
 {
   name: 'Jaśminowiec wonny',
   latinName: 'Philadelphus coronarius',
-  imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/e/ea/Philadelphus_coronarius0.jpg',
+  imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQKfhEETacfulvnve_z8z12goyV_w5xjjpt7g&s',
   species: 'shrub',
   soil: ['loamy', 'silty'],
   waterRequirement: 'medium',
@@ -160,7 +160,7 @@ const plants = [
 {
   name: 'Forsycja pośrednia',
   latinName: 'Forsythia × intermedia',
-  imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/2/2c/Forsythia_intermedia1.jpg',
+  imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8xJLkA3k_XXM-lAUzIpo3u19kGzh54EaHCA&s',
   species: 'shrub',
   soil: ['loamy', 'sandy'],
   waterRequirement: 'medium',
@@ -181,7 +181,7 @@ const plants = [
 {
   name: 'Piwonia chińska',
   latinName: 'Paeonia lactiflora',
-  imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/6/6f/Paeonia_lactiflora_1.jpg',
+  imageUrl: 'https://szkolka.sklep.pl/9056/piwonia-chinska-wladyslawa-.jpg',
   species: 'herb',
   soil: ['loamy', 'silty'],
   waterRequirement: 'medium',
@@ -202,7 +202,7 @@ const plants = [
 {
   name: 'Liliowiec ogrodowy',
   latinName: 'Hemerocallis',
-  imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/d/d8/Hemerocallis_Stella_D%27Oro_2.jpg',
+  imageUrl: 'https://lh5.googleusercontent.com/proxy/bTLw6kOOyfG5FvlYw_tCud_7E-yOfdpzziAed1ZyxYhirrwhnV8rZT2lyL57cUH-fJWRgbPjrfNI1iG1AWJqfJ8lruD8qFiqtKEBQBEFa4Et9yp7ftHMCoqX0JWB5XQ32GKZOjxoaVpmw0o7KtgNN3g',
   species: 'herb',
   soil: ['loamy', 'sandy'],
   waterRequirement: 'medium',
@@ -223,7 +223,7 @@ const plants = [
 {
   name: 'Trawa ozdobna – Kostrzewa sina',
   latinName: 'Festuca glauca',
-  imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/f/f6/Festuca_glauca_1.jpg',
+  imageUrl: 'https://www.bilscy.info/img/product_media/1001-2000/Kostrzewa-sina-Elijah-Blue-3143.jpg',
   species: 'herb',
   soil: ['sandy', 'loamy'],
   waterRequirement: 'low',
@@ -244,7 +244,7 @@ const plants = [
 {
   name: 'Rozchodnik okazały',
   latinName: 'Hylotelephium spectabile',
-  imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Sedum_spectabile.jpg',
+  imageUrl: 'https://dammera.pl//public_html/images/adaptive//480/media/djcatalog2/images/item/10/rozchodnik-okazaly-sedum-spectabile-039-herbersfreude-039_f.jpg',
   species: 'herb',
   soil: ['sandy', 'loamy'],
   waterRequirement: 'low',
@@ -265,7 +265,7 @@ const plants = [
 {
   name: 'Mięta pieprzowa',
   latinName: 'Mentha × piperita',
-  imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/f/f0/Mentha_piperita_001.JPG',
+  imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMvnSg0ulfMgCXROM3GsnNnQix1Iac8ZEhEg&s',
   species: 'herb',
   soil: ['loamy', 'silty'],
   waterRequirement: 'high',
@@ -276,7 +276,7 @@ const plants = [
   heightCm: 60,
   color: ['zielony'],
   compatibleWith: ['Melisa', 'Bazylia'],
-  soilPh: 6.5,
+  soilPh: 6,
   growthRate: 'fast',
   toxicity: false,
   careTips: 'Sadź w pojemniku — szybko się rozrasta i może stać się inwazyjna.',
@@ -286,7 +286,7 @@ const plants = [
 {
   name: 'Melisa lekarska',
   latinName: 'Melissa officinalis',
-  imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/8/8d/Melissa_officinalis_-_leaves.JPG',
+  imageUrl: 'https://cdn.galleries.smcloud.net/t/galleries/gf-WoNp-EBxn-EorA_melisa-lekarska-994x828.jpg',
   species: 'herb',
   soil: ['loamy', 'silty'],
   waterRequirement: 'medium',
@@ -307,7 +307,7 @@ const plants = [
 {
   name: 'Truskawka ogrodowa',
   latinName: 'Fragaria × ananassa',
-  imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/2/29/Fragaria_x_ananassa20110619_05.jpg',
+  imageUrl: 'https://thumbs.dreamstime.com/b/kwitnące-truskawek-rośliny-krzaka-nieba-truskawki-truskawkowe-kwitnie-truskawkowego-biel-ogrodowe-zakończenie-selekcyjna-111884035.jpg',
   species: 'fruit',
   soil: ['loamy', 'silty'],
   waterRequirement: 'medium',
@@ -318,7 +318,7 @@ const plants = [
   heightCm: 30,
   color: ['czerwony'],
   compatibleWith: ['Czosnek', 'Sałata'],
-  soilPh: 6.5,
+  soilPh: 6,
   growthRate: 'fast',
   toxicity: false,
   careTips: 'Usuwaj rozłogi, jeśli chcesz większe owoce; ściółkuj słomą.',

@@ -16,7 +16,7 @@ const UserSchema = new Schema<User>({
         unique: true, 
         lowercase: true,
         trim: true,
-        match: [/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, 'Wprowadzony email jest nieprawidłowy']
+        match: [/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/, 'The email address you entered is incorrect']
  },
     passwordHash: { type: String, required: true },
     sessionToken: { type: String, unique: true, sparse: true },
