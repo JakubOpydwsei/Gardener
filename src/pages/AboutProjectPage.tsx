@@ -46,6 +46,25 @@ function AboutProjectPage() {
           </ul>
         </div>
       </div>
+      <div className="lg:col-span-1">
+        <div className="sticky top-24 bg-base-200 border border-base-300 rounded-2xl p-6 shadow-sm">
+          <h2 className="text-xl font-semibold mb-2">Do pobrania</h2>
+          <p className="text-base-content/70 text-sm mb-6 mt-8">
+            Dokumentacja użytkownika
+          </p>
+          <a
+            href="/docs/dokumentacja-uzytkownika.pdf"
+            download
+            className="btn btn-primary w-full text-black"
+          >
+            Pobierz PDF
+          </a>
+          <p className="text-xs text-base-content/50 mt-4">
+            Plik zawiera instrukcję obsługi poszczególnych funkcjonalności
+            projektu.
+          </p>
+        </div>
+      </div>
     </>
   );
 }

@@ -64,6 +64,14 @@ export function GardenCreatorPage() {
                   />
                 </div>
                 <div className="w-full max-w-3xl mx-auto xl:mx-0 xl:flex-1">
+                  <div className="flex justify-end mb-4">
+                    <a
+                      href="/about-project"
+                      className="text-sm text-primary hover:underline flex items-center gap-1"
+                    >
+                      Instrukcja użytkownika
+                    </a>
+                  </div>
                   <CanvasStage
                     items={items}
                     setItems={setItems}
