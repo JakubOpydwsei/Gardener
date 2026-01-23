@@ -43,7 +43,7 @@ const PeriodSchema = new Schema<Period>(
 const PlantSchema = new Schema<Plant>({
   name: { type: String, required: true },
   latinName: { type: String },
-  imageUrl: { type: String },
+  imageUrl: { type: String, required: true },
 
   species: {
     type: String,
