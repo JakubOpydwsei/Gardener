@@ -1,54 +1,119 @@
-# React + TypeScript + Vite
+# Gardener
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Web application for garden management and plant planning.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## About
 
-## Expanding the ESLint configuration
+Gardener helps users browse a plant encyclopedia, create custom gardens, and plan their plantings. The app features a searchable plant database with detailed information about growing requirements and seasonal care.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+**Project type:** Engineering project (team of 3 contributors)  
+**Status:** MVP - Work in progress
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+---
+
+## Features
+
+### Plant Encyclopedia
+- Browse plant database with search and filtering
+- View detailed plant information (description, requirements, growing season)
+- Add plants to your garden
+
+### Garden Planner
+- Create and manage multiple gardens
+- Assign plants to gardens
+- Edit and remove plants
+- Visual plant list for each garden
+
+---
+
+## Tech Stack
+
+### Frontend
+- **React** - UI library
+- **TypeScript** - Type safety
+- **React Router** - Client-side routing
+- **DaisyUI** - Component library
+- **Fetch API** - HTTP requests
+- **Tailwind CSS** - CSS framework
+- **AOS** - Animation library
+
+### Backend
+- **Node.js** - Runtime environment
+- **Express** - Web framework
+- **MongoDB** - Database
+
+### Authentication
+- Session-based authentication with tokens
+
+---
+
+## Getting Started
+
+### Prerequisites
+- Node.js (v18+)
+- MongoDB
+- npm or yarn
+
+### Installation
+
+1. **Clone the repository**
+```bash
+git clone https://github.com/JakubOpydwsei/Gardener.git
+cd Gardener
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. **Install dependencies**
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+Frontend:
+```bash
+npm install
 ```
+
+Backend:
+```bash
+cd backend
+npm install
+```
+
+Or install all:
+```bash
+npm run install:all
+```
+
+3. **Set up environment variables**
+
+Create `.env` file in the `/backend` directory:
+```env
+MONGODB_URI=your_mongodb_connection_string
+PORT=3001
+```
+
+4. **Run the application**
+
+Start backend:
+```bash
+cd backend
+npm start
+```
+
+Start frontend (in a separate terminal):
+```bash
+npm run dev
+```
+
+Or run all:
+```bash
+npm run dev:all
+```
+
+The app will be available at `http://localhost:5173`
+
+---
+
+## Planned Features
+
+- [ ] AI-powered plant recommendations
+- [ ] Push notifications for plant care reminders
+- [ ] Progressive Web App (PWA) support
