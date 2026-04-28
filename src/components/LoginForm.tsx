@@ -44,6 +44,7 @@ export default function LoginForm() {
   return (
     <div className="max-h-screen flex items-center justify-center overflow-hidden">
       <form
+        noValidate
         onSubmit={handleSubmit(submit)}
         className="relative z-10 w-full max-w-md space-y-4 rounded-xl bg-white/20 backdrop-blur-lg border border-white/30 shadow-2xl px-6 py-6 text-white"
       >

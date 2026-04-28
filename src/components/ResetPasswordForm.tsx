@@ -44,6 +44,7 @@ export default function ResetPasswordForm() {
 
   return (
     <form
+      noValidate
       onSubmit={handleSubmit(submit)}
       className="max-w-md mx-auto mt-20 space-y-4"
     >

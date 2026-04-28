@@ -73,7 +73,11 @@ export default function RegisterForm() {
             </div>
           )}
 
-          <form onSubmit={handleSubmit(submit)} className="space-y-4">
+          <form
+            onSubmit={handleSubmit(submit)}
+            noValidate
+            className="space-y-4"
+          >
             <label className="block">
               <span className="label-text text-white">Email:</span>
               <input
